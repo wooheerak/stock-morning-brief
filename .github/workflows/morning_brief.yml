@@ -6,6 +6,10 @@ on:
     - cron: "30 22 * * 0-4"  # 월~금 (주말 제외)
   workflow_dispatch:  # 수동 실행 가능
 
+permissions:
+  contents: read
+  secrets: write  # 카카오 토큰 자동 갱신을 위해 필요
+
 jobs:
   morning-brief:
     runs-on: ubuntu-latest
@@ -31,3 +35,18 @@ jobs:
           KAKAO_REFRESH_TOKEN: ${{ secrets.KAKAO_REFRESH_TOKEN }}
           KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
         run: python main.py
+
+      - name: 카카오 토큰 Secrets 업데이트
+        if: success()
+        run: |
+          CACHE="/tmp/kakao_new_tokens.env"
+          if [ -f "$CACHE" ]; then
+            while IFS='=' read -r key value; do
+              [ -n "$key" ] && [ -n "$value" ] && echo "$value" | gh secret set "$key"
+            done < "$CACHE"
+            echo "카카오 토큰 GitHub Secrets 업데이트 완료"
+          else
+            echo "토큰 캐시 파일 없음 — 갱신 생략"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

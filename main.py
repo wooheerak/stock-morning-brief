@@ -8,7 +8,7 @@ from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
 from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
 from messenger.message_formatter import format_morning_brief, format_watchlist_brief
-from messenger.kakao_api import send_to_me
+from messenger.kakao_api import send_to_me, refresh_access_token
 
 load_dotenv()
 
@@ -25,6 +25,11 @@ def load_watchlist() -> dict:
 
 def run_morning_brief():
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 모닝 브리핑 시작")
+
+    # 카카오 토큰 갱신 (access_token 6시간 만료 → 매 실행 시 refresh_token으로 재발급)
+    tokens = refresh_access_token()
+    if tokens.get("access_token"):
+        os.environ["KAKAO_ACCESS_TOKEN"] = tokens["access_token"]
 
     # 1. 데이터 수집
     print("뉴스 수집 중...")

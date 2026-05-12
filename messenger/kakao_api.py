@@ -1,4 +1,5 @@
 import os
+import tempfile
 import requests
 import json
 from dotenv import load_dotenv
@@ -6,6 +7,48 @@ from dotenv import load_dotenv
 load_dotenv()
 
 KAKAO_API_BASE = "https://kapi.kakao.com"
+TOKEN_CACHE = os.path.join(tempfile.gettempdir(), "kakao_new_tokens.env")
+
+
+def refresh_access_token() -> dict:
+    """리프레시 토큰으로 새 액세스 토큰 발급. 매 실행 시 호출해야 함 (access_token 6시간 만료)."""
+    rest_api_key = os.getenv("KAKAO_REST_API_KEY")
+    refresh_token = os.getenv("KAKAO_REFRESH_TOKEN")
+
+    if not rest_api_key or not refresh_token:
+        print("[카카오] REST API 키 또는 리프레시 토큰 미설정")
+        return {}
+
+    url = "https://kauth.kakao.com/oauth/token"
+    data = {
+        "grant_type": "refresh_token",
+        "client_id": rest_api_key,
+        "refresh_token": refresh_token,
+        "client_secret": os.getenv("KAKAO_CLIENT_SECRET", ""),
+    }
+
+    try:
+        resp = requests.post(url, data=data, timeout=10)
+        resp.raise_for_status()
+        token_data = resp.json()
+
+        new_access = token_data.get("access_token", "")
+        new_refresh = token_data.get("refresh_token", "")  # 30일 이내 만료 시에만 반환
+
+        # GitHub Actions workflow가 읽어서 Secrets 업데이트하는 캐시 파일
+        with open(TOKEN_CACHE, "w") as f:
+            f.write(f"KAKAO_ACCESS_TOKEN={new_access}\n")
+            if new_refresh:
+                f.write(f"KAKAO_REFRESH_TOKEN={new_refresh}\n")
+
+        msg = "[카카오] 액세스 토큰 갱신 완료"
+        if new_refresh:
+            msg += " (리프레시 토큰도 갱신됨)"
+        print(msg)
+        return {"access_token": new_access, "refresh_token": new_refresh or refresh_token}
+    except Exception as e:
+        print(f"[카카오] 토큰 갱신 실패: {e}")
+        return {}
 
 
 def send_to_me(message: str) -> bool:
@@ -21,7 +64,6 @@ def send_to_me(message: str) -> bool:
         "Content-Type": "application/x-www-form-urlencoded",
     }
 
-    # 2000자 초과 시 분할 발송
     messages = _split_message(message, max_length=1900)
 
     success = True
@@ -47,35 +89,6 @@ def send_to_me(message: str) -> bool:
             success = False
 
     return success
-
-
-def refresh_access_token() -> str | None:
-    """액세스 토큰 갱신"""
-    rest_api_key = os.getenv("KAKAO_REST_API_KEY")
-    refresh_token = os.getenv("KAKAO_REFRESH_TOKEN")
-
-    if not rest_api_key or not refresh_token:
-        print("[카카오] REST API 키 또는 리프레시 토큰 미설정")
-        return None
-
-    url = "https://kauth.kakao.com/oauth/token"
-    data = {
-        "grant_type": "refresh_token",
-        "client_id": rest_api_key,
-        "refresh_token": refresh_token,
-        "client_secret": os.getenv("KAKAO_CLIENT_SECRET", ""),
-    }
-
-    try:
-        resp = requests.post(url, data=data, timeout=10)
-        resp.raise_for_status()
-        token_data = resp.json()
-        new_token = token_data.get("access_token")
-        print(f"[카카오] 액세스 토큰 갱신 완료")
-        return new_token
-    except Exception as e:
-        print(f"[카카오] 토큰 갱신 실패: {e}")
-        return None
 
 
 def _split_message(message: str, max_length: int = 1900) -> list:
