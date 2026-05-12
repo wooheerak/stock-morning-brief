@@ -1,0 +1,208 @@
+from datetime import datetime
+import re
+from typing import Dict, List
+
+WEEKDAY_KR = ["월", "화", "수", "목", "금", "토", "일"]
+CATEGORY_LABEL = {
+    "구조적성장": "구조적성장",
+    "이벤트드리븐": "이벤트",
+    "수주기반": "수주기반",
+    "가치": "가치",
+}
+SIGNAL_EMOJI = {"추격가능": "🟢", "눌림목대기": "🟡", "관망": "🔴"}
+
+
+def _norm_dt(time_str: str, today: datetime) -> str:
+    if not time_str:
+        return ""
+    if re.match(r'\d{4}/\d{2}/\d{2}', time_str):
+        return time_str
+    if re.match(r'^\d{2}:\d{2}$', time_str.strip()):
+        return today.strftime("%Y/%m/%d ") + time_str.strip()
+    return time_str
+
+
+def _cut(text: str, limit: int) -> str:
+    return text[:limit] + "…" if len(text) > limit else text
+
+
+def format_morning_brief(
+    analysis: Dict,
+    overseas: Dict,
+    korean_market: Dict,
+    date: datetime = None,
+) -> str:
+    if date is None:
+        date = datetime.now()
+
+    weekday = WEEKDAY_KR[date.weekday()]
+    date_str = date.strftime(f"%Y.%m.%d ({weekday})")
+    fetch_time = overseas.get("fetched_at", date.strftime("%Y/%m/%d %H:%M"))
+
+    sentiment = analysis.get("market_sentiment", "중립")
+    score = analysis.get("sentiment_score", 50)
+    breakdown = analysis.get("sentiment_breakdown", "")
+    s_emoji = {"긍정": "🟢", "중립": "🟡", "부정": "🔴"}.get(sentiment, "🟡")
+
+    lines = [f"📊 {date_str} 모닝 브리핑", ""]
+
+    # 시장심리 + 산식
+    lines.append(f"시장심리: {s_emoji} {sentiment} {score}점")
+    if breakdown:
+        lines.append(f"  └ {_cut(breakdown, 80)}")
+
+    # 시장 스타일
+    market_style = analysis.get("market_style", [])
+    if market_style:
+        lines.append("📌 " + " | ".join(market_style[:3]))
+    lines.append("")
+
+    # 해외 지수
+    indices = overseas.get("indices", {})
+    if indices:
+        parts = [f"{n} {d['signal']}{d['change_pct']:+.1f}%" for n, d in indices.items() if d]
+        lines.append("🌏 해외지수 (전일 미국장 마감)")
+        lines.append("  " + " | ".join(parts))
+
+    # 미국채 금리
+    bonds = overseas.get("bonds", {})
+    tnx = bonds.get("미국채10년물")
+    if tnx:
+        bp = tnx.get("change_bp", 0)
+        lines.append(f"  🏦 미국채10년물 {tnx['value']:.2f}% {tnx['signal']}{bp:+d}bp")
+
+    # 주요 미국 종목
+    stocks = overseas.get("stocks", {})
+    if stocks:
+        parts = [f"{n} {d['signal']}{d['change_pct']:+.1f}%" for n, d in stocks.items() if d]
+        lines.append("  " + " | ".join(parts))
+
+    # 환율
+    fx = overseas.get("fx", {})
+    fx_parts = []
+    if fx.get("달러/원"):
+        d = fx["달러/원"]
+        fx_parts.append(f"달러/원 {d['value']:,.1f}원 {d['signal']}{d['change_pct']:+.1f}%")
+    if fx.get("달러/엔"):
+        d = fx["달러/엔"]
+        fx_parts.append(f"달러/엔 {d['value']:.1f} {d['signal']}{d['change_pct']:+.1f}%")
+    if fx_parts:
+        lines.append("  💱 " + " | ".join(fx_parts))
+
+    # 국내 지수
+    if korean_market:
+        parts = [
+            f"{n} {d['value']:,.2f}p {d['signal']}{d['change_pct']:+.2f}%"
+            for n, d in korean_market.items() if d
+        ]
+        lines.append(f"🇰🇷 국내지수 (전일 마감, 수집: {fetch_time})")
+        lines.append("  " + " | ".join(parts))
+    # 강한/약한 섹터
+    strong = analysis.get("strong_sectors", [])
+    weak = analysis.get("weak_sectors", [])
+    if strong or weak:
+        s_str = "🔥 " + "·".join(_cut(s, 8) for s in strong[:3]) if strong else ""
+        w_str = "❄️ " + "·".join(_cut(w, 8) for w in weak[:3]) if weak else ""
+        lines.append("  ".join(filter(None, [s_str, w_str])))
+    lines.append("")
+
+    # 핵심 이슈 (수치 + 투자 시사점)
+    key_issues = analysis.get("key_issues", [])
+    if key_issues:
+        lines.append("📰 핵심 이슈")
+        for i, issue in enumerate(key_issues[:3], 1):
+            title = issue.get("title", "")
+            summary = issue.get("summary", "")
+            implication = issue.get("implication", "")
+            source = issue.get("source", "")
+            t = _norm_dt(issue.get("time", ""), date)
+            meta = f"{source} {t}".strip() if t else source
+
+            lines.append(f"{i}. {title}")
+            if summary:
+                lines.append(f"   └ {_cut(summary, 65)}")
+            if implication:
+                lines.append(f"   → {_cut(implication, 55)}")
+            if meta:
+                lines.append(f"   [{meta}]")
+        lines.append("")
+
+    # 단기 주목 종목
+    short_stocks = analysis.get("short_term_stocks", [])
+    if short_stocks:
+        lines.append("⚡ 단기 주목 (1~5일)")
+        for s in short_stocks[:3]:
+            sig = s.get("trade_signal", "")
+            sig_emoji = SIGNAL_EMOJI.get(sig, "")
+            prev = s.get("prev_change", "")
+            lines.append(f"• {s['name']}({s['code']}) {prev}  {sig_emoji}{sig}")
+            if s.get("action_guide"):
+                lines.append(f"  전략: {_cut(s['action_guide'], 50)}")
+            lines.append(f"  근거: {_cut(s['reason'], 45)}")
+            if s.get("stop_loss"):
+                lines.append(f"  손절: {s['stop_loss']}")
+            lines.append(f"  ⚠️ {_cut(s['risk'], 38)}")
+        lines.append("")
+
+    # 중기 관심 종목
+    mid_stocks = analysis.get("mid_term_stocks", [])
+    if mid_stocks:
+        lines.append("📈 중기 관심 (1~3개월)")
+        for s in mid_stocks[:3]:
+            cat = CATEGORY_LABEL.get(s.get("category", ""), s.get("category", ""))
+            lines.append(f"• [{cat}] {s['name']}({s['code']})")
+            lines.append(f"  {_cut(s['reason'], 48)}")
+        lines.append("")
+
+    # 오늘 전략 + 스탠스
+    strategy = analysis.get("today_strategy", "")
+    stance = analysis.get("strategy_stance", {})
+    if strategy or stance:
+        lines.append("💡 오늘 전략")
+        if stance:
+            stance_label = f"{stance.get('emoji', '')} {stance.get('label', '')} | 현금 {stance.get('cash_ratio', '')}"
+            lines.append(f"  📌 {stance_label}")
+        if strategy:
+            lines.append(f"  {_cut(strategy, 110)}")
+        lines.append("")
+
+    # 리스크
+    risks = analysis.get("risk_factors", [])
+    if risks:
+        lines.append("⚠️ 리스크")
+        for r in risks[:3]:
+            lines.append(f"  • {_cut(r, 50)}")
+        lines.append("")
+
+    # 오늘 체크포인트
+    checkpoints = analysis.get("checkpoints", [])
+    if checkpoints:
+        lines.append("👀 오늘 체크포인트")
+        for c in checkpoints[:5]:
+            lines.append(f"  □ {_cut(c, 40)}")
+        lines.append("")
+
+    lines.append("※ 투자 판단은 본인 결정 하에 진행하세요.")
+    return "\n".join(lines)
+
+
+def format_watchlist_brief(watchlist_analysis: Dict, watchlist: List[str]) -> str:
+    lines = ["📌 관심종목 분석", ""]
+
+    for item in watchlist_analysis.get("watchlist_analysis", []):
+        outlook_emoji = {"긍정": "🟢", "중립": "🟡", "부정": "🔴"}.get(
+            item.get("today_outlook", "중립"), "🟡"
+        )
+        action_emoji = {"매수검토": "📈", "관망": "👀", "주의": "⚠️"}.get(
+            item.get("action_hint", "관망"), "👀"
+        )
+        lines.append(f"{outlook_emoji} {item['name']}({item['code']}) {action_emoji} {item['action_hint']}")
+        if item.get("key_news"):
+            lines.append(f"  뉴스: {_cut(item['key_news'], 45)}")
+        lines.append(f"  {_cut(item['reason'], 50)}")
+        if item.get("watch_point"):
+            lines.append(f"  주시: {_cut(item['watch_point'], 40)}")
+
+    lines.append("")
+    lines.append("※ 투자 판단은 본인 결정 하에 진행하세요.")
+    return "\n".join(lines)
