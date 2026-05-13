@@ -57,6 +57,25 @@ def format_morning_brief(
 
     lines = [f"📊 {date_str} 모닝 브리핑", ""]
 
+    # 1분 요약 (비전문가용)
+    qs = analysis.get("quick_summary", {})
+    if qs:
+        mood_map = {"긍정": "주목", "중립": "관망", "부정": "조심"}
+        mood = mood_map.get(sentiment, "관망")
+        lines.append("━━ 1분 요약 ━━")
+        lines.append(f"{s_emoji} {mood}")
+        if qs.get("one_line"):
+            lines.append(_cut(qs["one_line"], 85))
+        if qs.get("action"):
+            lines.append(f"전략: {_cut(qs['action'], 65)}")
+        checks = qs.get("check_top3", [])
+        if checks:
+            nums = ["①", "②", "③"]
+            for i, c in enumerate(checks[:3]):
+                lines.append(f"  {nums[i]} {_cut(c, 28)}")
+        lines.append("─" * 18)
+        lines.append("")
+
     # 시장심리 + 산식
     lines.append(f"시장심리: {s_emoji} {sentiment} {score}점")
     if breakdown:
@@ -135,8 +154,10 @@ def format_morning_brief(
             if implication:
                 lines.append(f"   → {_cut(implication, 55)}")
             if source:
+                # source 필드에 날짜가 섞여 들어온 경우 제거 (예: "한국경제 2026/05/12 10:41" → "한국경제")
+                clean_source = re.sub(r'\s+\d{4}[/\-]\d{2}[/\-]\d{2}.*$', '', source).strip()
                 date_str = _fmt_date(t) if t else ""
-                source_line = f"{source} · {date_str}" if date_str else source
+                source_line = f"{clean_source} · {date_str}" if date_str else clean_source
                 lines.append(f"   출처: {source_line}")
         lines.append("")
 

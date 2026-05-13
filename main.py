@@ -94,7 +94,6 @@ if __name__ == "__main__":
             raise ValueError(f"[데이터 검증 실패] 코스피 {kospi_val:,.2f}p — 비정상 저값 (파싱 오류 의심).")
         analysis = analyze_morning_brief(overseas, korean, news)
         message = format_morning_brief(analysis, overseas, korean)
-        print(message)
-        print(f"\n[문자 수: {len(message)}자]")
+        sys.stdout.buffer.write((message + f"\n\n[문자 수: {len(message)}자]\n").encode("utf-8"))
     else:
         run_morning_brief()
