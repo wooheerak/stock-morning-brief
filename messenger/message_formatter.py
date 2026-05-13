@@ -60,7 +60,7 @@ def format_morning_brief(
     # 시장심리 + 산식
     lines.append(f"시장심리: {s_emoji} {sentiment} {score}점")
     if breakdown:
-        lines.append(f"  └ {_cut(breakdown, 80)}")
+        lines.append(f"  └ {_cut(breakdown, 110)}")
 
     # 시장 스타일
     market_style = analysis.get("market_style", [])
