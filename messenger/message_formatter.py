@@ -67,12 +67,12 @@ def format_morning_brief(
         if qs.get("one_line"):
             lines.append(_cut(qs["one_line"], 85))
         if qs.get("action"):
-            lines.append(f"전략: {_cut(qs['action'], 65)}")
+            lines.append(f"전략: {_cut(qs['action'], 80)}")
         checks = qs.get("check_top3", [])
         if checks:
             nums = ["①", "②", "③"]
             for i, c in enumerate(checks[:3]):
-                lines.append(f"  {nums[i]} {_cut(c, 28)}")
+                lines.append(f"  {nums[i]} {_cut(c, 32)}")
         lines.append("─" * 18)
         lines.append("")
 
@@ -131,8 +131,8 @@ def format_morning_brief(
     strong = analysis.get("strong_sectors", [])
     weak = analysis.get("weak_sectors", [])
     if strong or weak:
-        s_str = "🔥 " + "·".join(_cut(s, 8) for s in strong[:3]) if strong else ""
-        w_str = "❄️ " + "·".join(_cut(w, 8) for w in weak[:3]) if weak else ""
+        s_str = "🔥 " + "·".join(_cut(s, 10) for s in strong[:3]) if strong else ""
+        w_str = "❄️ " + "·".join(_cut(w, 10) for w in weak[:3]) if weak else ""
         lines.append("  ".join(filter(None, [s_str, w_str])))
     lines.append("")
 
@@ -150,9 +150,9 @@ def format_morning_brief(
 
             lines.append(f"{i}. {title}")
             if summary:
-                lines.append(f"   └ {_cut(summary, 65)}")
+                lines.append(f"   └ {_cut(summary, 80)}")
             if implication:
-                lines.append(f"   → {_cut(implication, 55)}")
+                lines.append(f"   → {_cut(implication, 70)}")
             if source:
                 # source 필드에 날짜가 섞여 들어온 경우 제거 (예: "한국경제 2026/05/12 10:41" → "한국경제")
                 clean_source = re.sub(r'\s+\d{4}[/\-]\d{2}[/\-]\d{2}.*$', '', source).strip()
@@ -171,11 +171,11 @@ def format_morning_brief(
             prev = s.get("prev_change", "")
             lines.append(f"• {s['name']}({s['code']}) {prev}  {sig_emoji}{sig}")
             if s.get("action_guide"):
-                lines.append(f"  전략: {_cut(s['action_guide'], 50)}")
-            lines.append(f"  근거: {_cut(s['reason'], 45)}")
+                lines.append(f"  전략: {_cut(s['action_guide'], 60)}")
+            lines.append(f"  근거: {_cut(s['reason'], 60)}")
             if s.get("stop_loss"):
                 lines.append(f"  손절: {s['stop_loss']}")
-            lines.append(f"  ⚠️ {_cut(s['risk'], 38)}")
+            lines.append(f"  ⚠️ {_cut(s['risk'], 48)}")
         lines.append("")
 
     # 중기 관심 종목
@@ -185,7 +185,7 @@ def format_morning_brief(
         for s in mid_stocks[:3]:
             cat = CATEGORY_LABEL.get(s.get("category", ""), s.get("category", ""))
             lines.append(f"• [{cat}] {s['name']}({s['code']})")
-            lines.append(f"  {_cut(s['reason'], 48)}")
+            lines.append(f"  {_cut(s['reason'], 60)}")
         lines.append("")
 
     # 오늘 전략 + 스탠스
@@ -205,7 +205,7 @@ def format_morning_brief(
     if risks:
         lines.append("⚠️ 리스크")
         for r in risks[:3]:
-            lines.append(f"  • {_cut(r, 50)}")
+            lines.append(f"  • {_cut(r, 60)}")
         lines.append("")
 
     # 오늘 체크포인트
@@ -213,7 +213,7 @@ def format_morning_brief(
     if checkpoints:
         lines.append("👀 오늘 체크포인트")
         for c in checkpoints[:5]:
-            lines.append(f"  □ {_cut(c, 40)}")
+            lines.append(f"  □ {_cut(c, 48)}")
         lines.append("")
 
     lines.append("※ 투자 판단은 본인 결정 하에 진행하세요.")
