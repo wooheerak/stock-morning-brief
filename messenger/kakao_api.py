@@ -1,4 +1,5 @@
 import os
+import time
 import tempfile
 import requests
 import json
@@ -87,6 +88,9 @@ def send_to_me(message: str) -> bool:
         except Exception as e:
             print(f"[카카오] 발송 오류: {e}")
             success = False
+
+        if i < len(messages) - 1:
+            time.sleep(1)
 
     return success
 

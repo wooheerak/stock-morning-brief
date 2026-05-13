@@ -140,7 +140,7 @@ def format_morning_brief(
     key_issues = analysis.get("key_issues", [])
     if key_issues:
         lines.append("📰 핵심 이슈")
-        for i, issue in enumerate(key_issues[:3], 1):
+        for i, issue in enumerate(key_issues[:2], 1):
             title = issue.get("title", "")
             summary = issue.get("summary", "")
             implication = issue.get("implication", "")
@@ -165,7 +165,7 @@ def format_morning_brief(
     short_stocks = analysis.get("short_term_stocks", [])
     if short_stocks:
         lines.append("⚡ 단기 주목 (1~5일)")
-        for s in short_stocks[:3]:
+        for s in short_stocks[:2]:
             sig = s.get("trade_signal", "")
             sig_emoji = SIGNAL_EMOJI.get(sig, "")
             prev = s.get("prev_change", "")
