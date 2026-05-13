@@ -78,15 +78,21 @@ def send_to_me(message: str) -> bool:
             template["text"] = f"[{i+1}/{len(messages)}]\n{chunk}"
 
         data = {"template_object": json.dumps(template, ensure_ascii=False)}
-        try:
-            resp = requests.post(url, headers=headers, data=data, timeout=10)
-            if resp.status_code != 200:
-                print(f"[카카오] 발송 실패 ({i+1}번째): {resp.status_code} {resp.text}")
-                success = False
-            else:
-                print(f"[카카오] 발송 성공 ({i+1}/{len(messages)})")
-        except Exception as e:
-            print(f"[카카오] 발송 오류: {e}")
+        sent = False
+        for attempt in range(2):
+            try:
+                resp = requests.post(url, headers=headers, data=data, timeout=10)
+                if resp.status_code == 200:
+                    print(f"[카카오] 발송 성공 ({i+1}/{len(messages)})")
+                    sent = True
+                    break
+                else:
+                    print(f"[카카오] 발송 실패 ({i+1}번째, 시도{attempt+1}): {resp.status_code} {resp.text}")
+            except Exception as e:
+                print(f"[카카오] 발송 오류 ({i+1}번째, 시도{attempt+1}): {e}")
+            if attempt == 0:
+                time.sleep(2)
+        if not sent:
             success = False
 
         if i < len(messages) - 1:

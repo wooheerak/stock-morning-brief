@@ -33,7 +33,7 @@ def run_morning_brief():
 
     # 1. 데이터 수집
     print("뉴스 수집 중...")
-    news = naver_news(20) + hankyung_news(15)
+    news = naver_news(12) + hankyung_news(8)
     print(f"  → 총 {len(news)}건 수집")
 
     print("시장 데이터 수집 중...")
@@ -68,6 +68,7 @@ def run_morning_brief():
         message = message + "\n\n" + watchlist_message
 
     # 5. 카카오톡 발송
+    print(f"메시지 총 길이: {len(message)}자")
     print("카카오톡 발송 중...")
     success = send_to_me(message)
 
