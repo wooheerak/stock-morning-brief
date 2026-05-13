@@ -26,6 +26,17 @@ def _cut(text: str, limit: int) -> str:
     return text[:limit] + "…" if len(text) > limit else text
 
 
+def _fmt_date(time_str: str) -> str:
+    """YYYY/MM/DD HH:MM → YYYY년 MM월 DD일 HH:MM"""
+    m = re.match(r'(\d{4})/(\d{2})/(\d{2})\s+(\d{2}:\d{2})', time_str)
+    if m:
+        return f"{m.group(1)}년 {m.group(2)}월 {m.group(3)}일 {m.group(4)}"
+    m2 = re.match(r'(\d{4})/(\d{2})/(\d{2})', time_str)
+    if m2:
+        return f"{m2.group(1)}년 {m2.group(2)}월 {m2.group(3)}일"
+    return time_str
+
+
 def format_morning_brief(
     analysis: Dict,
     overseas: Dict,
@@ -123,8 +134,10 @@ def format_morning_brief(
                 lines.append(f"   └ {_cut(summary, 65)}")
             if implication:
                 lines.append(f"   → {_cut(implication, 55)}")
-            if meta:
-                lines.append(f"   [{meta}]")
+            if source:
+                date_str = _fmt_date(t) if t else ""
+                source_line = f"{source} · {date_str}" if date_str else source
+                lines.append(f"   출처: {source_line}")
         lines.append("")
 
     # 단기 주목 종목
