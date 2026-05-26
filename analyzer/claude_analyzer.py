@@ -1,19 +1,54 @@
 import json
 import os
+import time
 from typing import List, Dict
 from google import genai
+from google.genai import errors as genai_errors
 from dotenv import load_dotenv
 from .prompts import MORNING_BRIEF_PROMPT, WATCHLIST_ANALYSIS_PROMPT, STOCK_QUERY_PROMPT
 
 load_dotenv()
 
 _client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-MODEL = "gemini-2.5-flash"
+
+# 1순위 모델 → 503 반복 시 폴백 순서
+_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+MODEL = _MODELS[0]
+
+_MAX_RETRIES = 5          # 모델당 최대 재시도 횟수
+_RETRY_BASE_SEC = 10      # 초기 대기 시간 (초), 이후 2배씩 증가
 
 
 def _call_gemini(prompt: str) -> str:
-    response = _client.models.generate_content(model=MODEL, contents=prompt)
-    return response.text
+    """503/429 등 일시적 오류에 대해 지수 백오프 + 모델 폴백으로 재시도"""
+    last_exc: Exception = RuntimeError("Gemini 호출 실패")
+
+    for model in _MODELS:
+        wait = _RETRY_BASE_SEC
+        for attempt in range(1, _MAX_RETRIES + 1):
+            try:
+                response = _client.models.generate_content(model=model, contents=prompt)
+                if model != MODEL:
+                    print(f"  [Gemini] 폴백 모델 사용: {model}")
+                return response.text
+            except genai_errors.ServerError as e:
+                # 503 UNAVAILABLE — 일시적 과부하, 재시도 가능
+                last_exc = e
+                print(f"  [Gemini] {model} 503 오류 (시도 {attempt}/{_MAX_RETRIES}), {wait}초 대기...")
+                time.sleep(wait)
+                wait = min(wait * 2, 120)   # 최대 120초
+            except genai_errors.ClientError as e:
+                # 429 RESOURCE_EXHAUSTED — 할당량 초과, 잠시 대기 후 재시도
+                if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                    last_exc = e
+                    print(f"  [Gemini] {model} 429 할당량 초과 (시도 {attempt}/{_MAX_RETRIES}), {wait}초 대기...")
+                    time.sleep(wait)
+                    wait = min(wait * 2, 120)
+                else:
+                    raise   # 4xx 기타 오류는 재시도 없이 즉시 올림
+        print(f"  [Gemini] {model} {_MAX_RETRIES}회 재시도 소진 → 다음 모델로 폴백")
+
+    raise RuntimeError(f"모든 Gemini 모델 호출 실패. 마지막 오류: {last_exc}") from last_exc
 
 
 def _parse_json_response(text: str) -> Dict:
