@@ -67,12 +67,17 @@ def send_to_me(message: str) -> bool:
 
     messages = _split_message(message, max_length=1900)
 
+    # 서비스 URL: 환경변수 우선, 없으면 GitHub 레포로 폴백
+    service_url = os.getenv(
+        "SERVICE_URL", "https://github.com/wooheerak/stock-morning-brief"
+    )
+
     success = True
     for i, chunk in enumerate(messages):
         template = {
             "object_type": "text",
             "text": chunk,
-            "link": {"web_url": "http://localhost:5000", "mobile_web_url": "http://localhost:5000"},
+            "link": {"web_url": service_url, "mobile_web_url": service_url},
         }
         if len(messages) > 1:
             template["text"] = f"[{i+1}/{len(messages)}]\n{chunk}"
