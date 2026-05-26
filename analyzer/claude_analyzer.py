@@ -15,7 +15,7 @@ _client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 _MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
 MODEL = _MODELS[0]
 
-_MAX_RETRIES = 5          # 모델당 최대 재시도 횟수
+_MAX_RETRIES = 3          # 모델당 최대 재시도 횟수 (10→20→40초, 총 70초)
 _RETRY_BASE_SEC = 10      # 초기 대기 시간 (초), 이후 2배씩 증가
 
 
