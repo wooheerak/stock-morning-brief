@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import List, Dict
 import re
+
+_KST = timezone(timedelta(hours=9))
 
 HEADERS = {
     "User-Agent": (
@@ -83,10 +85,10 @@ def fetch_market_news(count: int = 20) -> List[Dict]:
                 if m:
                     time_str = f"{m.group(1)}/{m.group(2)}/{m.group(3)} {m.group(4)}"
                 else:
-                    # HH:MM 만 있는 경우 오늘 날짜 붙이기
+                    # HH:MM 만 있는 경우 오늘 날짜 붙이기 (KST 기준)
                     m2 = re.search(r'(\d{2}:\d{2})', raw)
                     if m2:
-                        today = datetime.now().strftime("%Y/%m/%d")
+                        today = datetime.now(_KST).strftime("%Y/%m/%d")
                         time_str = f"{today} {m2.group(1)}"
 
             articles.append({

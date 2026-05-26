@@ -1,6 +1,13 @@
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import re
 from typing import Dict, List
+
+KST = timezone(timedelta(hours=9))
+
+
+def _now_kst() -> datetime:
+    """타임존에 무관하게 항상 KST 기준 현재 시각 반환"""
+    return datetime.now(KST).replace(tzinfo=None)
 
 WEEKDAY_KR = ["월", "화", "수", "목", "금", "토", "일"]
 CATEGORY_LABEL = {
@@ -44,7 +51,7 @@ def format_morning_brief(
     date: datetime = None,
 ) -> str:
     if date is None:
-        date = datetime.now()
+        date = _now_kst()
 
     weekday = WEEKDAY_KR[date.weekday()]
     date_str = date.strftime(f"%Y.%m.%d ({weekday})")
