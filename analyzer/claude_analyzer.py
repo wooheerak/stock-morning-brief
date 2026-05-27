@@ -1,7 +1,7 @@
 import json
 import os
 import time
-from typing import List, Dict
+from typing import List, Dict, Optional
 from google import genai
 from google.genai import errors as genai_errors
 from dotenv import load_dotenv
@@ -94,8 +94,11 @@ def analyze_morning_brief(
     overseas_market: Dict,
     korean_market: Dict,
     news_list: List[Dict],
+    candidates: Optional[List[Dict]] = None,
 ) -> Dict:
-    """뉴스 + 시장 데이터 → 모닝 브리핑 분석"""
+    """뉴스 + 시장 데이터 + 후보 종목 → 모닝 브리핑 분석"""
+    from scraper.stock_screener import screen_candidates, format_candidates_for_prompt
+
     overseas_str = _format_market_data(overseas_market)
     korean_str = _format_korean_market(korean_market)
     news_str = _format_news_list(news_list)
@@ -110,6 +113,13 @@ def analyze_morning_brief(
     usdkrw_val = fx.get("달러/원", {}).get("value", 0)
     usdkrw_str = f"{usdkrw_val:,.0f}" if usdkrw_val else "데이터없음"
 
+    # 후보 종목 — 전달받지 않으면 스크리너 직접 실행
+    if candidates is None:
+        print("종목 후보 스크리닝 중...")
+        candidates = screen_candidates(news_list)
+
+    candidates_str = format_candidates_for_prompt(candidates)
+
     prompt = MORNING_BRIEF_PROMPT.format(
         overseas_market=overseas_str,
         korean_market=korean_str,
@@ -117,6 +127,7 @@ def analyze_morning_brief(
         news_count=len(news_list),
         news_list=news_str,
         usdkrw=usdkrw_str,
+        candidates=candidates_str,
     )
 
     response = _call_gemini(prompt)

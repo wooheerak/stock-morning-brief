@@ -14,6 +14,7 @@ from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
 from scraper.validator import validate_market_data
 from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
+from analyzer.performance_tracker import save_recommendations, evaluate_and_update
 from messenger.message_formatter import format_morning_brief, format_watchlist_brief
 from messenger.kakao_api import send_to_me, refresh_access_token
 
@@ -78,7 +79,14 @@ def run_morning_brief():
         watchlist_message = format_watchlist_brief(watchlist_result, all_watchlist)
         message = message + "\n\n" + watchlist_message
 
-    # 5. 카카오톡 발송
+    # 5. 성과 추적 — 오늘 추천 저장 + 과거 성과 평가
+    brief_date = _now_kst().strftime("%Y-%m-%d")
+    save_recommendations(analysis, brief_date)
+    perf_summary = evaluate_and_update()
+    if perf_summary:
+        print(perf_summary)
+
+    # 6. 카카오톡 발송
     print(f"메시지 총 길이: {len(message)}자")
     print("카카오톡 발송 중...")
     success = send_to_me(message)

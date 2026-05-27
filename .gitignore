@@ -11,3 +11,4 @@ build/
 venv/
 *.log
 data/watchlist.json
+data/performance_log.json
