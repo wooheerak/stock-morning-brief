@@ -276,8 +276,36 @@ def format_morning_brief(
     fail_items = [re.sub(r'^[\W\s]+', '', w.split(":")[0]).strip() for w in val_warnings]
     fail_str = "(" + ", ".join(f[:8] for f in fail_items[:2]) + " 실패)" if fail_items else ""
 
-    guardrail_log = analysis.get("_guardrail_log", [])
-    guardrail_str = "적용" if guardrail_log else "미적용"
+    # 가드레일 상태 — _guardrail_info 구조화 정보 우선 사용
+    guardrail_info = analysis.get("_guardrail_info", {})
+    if guardrail_info:
+        if guardrail_info.get("score_corrected") and guardrail_info.get("applied"):
+            # 스탠스도 바뀌고 점수도 보정됨
+            bl = guardrail_info.get("before_label", "")
+            al = guardrail_info.get("after_label", "")
+            bs = guardrail_info.get("before_score", "")
+            as_ = guardrail_info.get("after_score", "")
+            if bl != al:
+                guardrail_str = f"보정:{bl}→{al}/점수{bs}→{as_}"
+            else:
+                guardrail_str = f"점수보정:{bs}→{as_}"
+        elif guardrail_info.get("applied"):
+            # 스탠스만 바뀜 (score_corrected=False, stance_changed=True)
+            bl = guardrail_info.get("before_label", "")
+            al = guardrail_info.get("after_label", "")
+            guardrail_str = f"보정:{bl}→{al}"
+        elif guardrail_info.get("score_corrected"):
+            # 점수만 보정
+            bs = guardrail_info.get("before_score", "")
+            as_ = guardrail_info.get("after_score", "")
+            guardrail_str = f"점수보정:{bs}→{as_}"
+        else:
+            # 가드레일 조건 없음 — AI 결과 그대로
+            al = guardrail_info.get("after_label", analysis.get("strategy_stance", {}).get("label", ""))
+            guardrail_str = f"AI:{al}"
+    else:
+        # _guardrail_info 없음 (이전 버전 호환)
+        guardrail_str = "미적용"
 
     is_intraday = korean_market.get("_is_intraday", False)
     news_label = "장중" if is_intraday else "36h이내"

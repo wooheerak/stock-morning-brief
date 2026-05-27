@@ -96,12 +96,15 @@ def run_morning_brief():
         )
 
     # 2. AI 분석
+    brief_date = _now_kst().strftime("%Y-%m-%d")
+    brief_time = _now_kst().strftime("%H:%M")
+
     print("Gemini AI 분석 중...")
     analysis = analyze_morning_brief(overseas, korean, news)
 
-    # 2-1. 전략 가드레일 후처리 (AI 결과 보정)
+    # 2-1. 전략 가드레일 후처리 (AI 결과 보정 + 시간대 텍스트 클린업)
     print("전략 가드레일 적용 중...")
-    analysis = apply_strategy_guardrails(analysis, overseas, korean)
+    analysis = apply_strategy_guardrails(analysis, overseas, korean, briefing_time=brief_time)
 
     # 3. 메시지 포맷 (검증 경고 전달 → 신뢰도 footer)
     message = format_morning_brief(analysis, overseas, korean, val_warnings=val_warnings)
@@ -120,8 +123,6 @@ def run_morning_brief():
         message = message + "\n\n" + watchlist_message
 
     # 5. 성과 추적
-    brief_date = _now_kst().strftime("%Y-%m-%d")
-    brief_time = _now_kst().strftime("%H:%M")
 
     # 기존 단순 성과 로그 (performance_log.json)
     save_recommendations(analysis, brief_date)
