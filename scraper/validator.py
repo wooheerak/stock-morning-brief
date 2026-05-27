@@ -25,6 +25,10 @@ _RANGES: Dict[str, Tuple[float, float]] = {
     # 국내 지수
     "코스피":               (500,    20_000),
     "코스닥":               (300,    5_000),
+    # 원자재
+    "WTI원유":              (20,     300),    # $/barrel
+    "금":                   (500,    5_000),  # $/oz
+    "구리":                 (1,      30),     # $/lb
 }
 
 # 단일 세션 변동률 임계값 (이 이상이면 파싱 오류 의심)
@@ -94,6 +98,9 @@ def validate_market_data(overseas: Dict, korean: Dict) -> Tuple[bool, List[str]]
         _flag(name, d)
 
     for name, d in overseas.get("bonds", {}).items():
+        _flag(name, d)
+
+    for name, d in overseas.get("commodities", {}).items():
         _flag(name, d)
 
     for name, d in korean.items():

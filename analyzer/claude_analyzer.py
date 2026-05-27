@@ -1,12 +1,37 @@
 import json
 import os
 import time
-from typing import List, Dict, Optional
+from datetime import datetime, timezone, timedelta
+from typing import List, Dict, Optional, Tuple
 from google import genai
 from google.genai import errors as genai_errors
 from dotenv import load_dotenv
 from .prompts import MORNING_BRIEF_PROMPT, WATCHLIST_ANALYSIS_PROMPT, STOCK_QUERY_PROMPT
 from .schemas import MorningBriefAnalysis
+
+_KST = timezone(timedelta(hours=9))
+
+
+def _get_time_context() -> Tuple[str, str]:
+    """현재 KST 시각과 시장 상태 문자열 반환 → 체크포인트 생성 가이드용."""
+    now = datetime.now(_KST)
+    time_str = now.strftime("%H:%M")
+
+    wd = now.weekday()
+    if wd >= 5:
+        ctx = "주말(장 휴장)"
+    elif now.hour < 9:
+        ctx = "장 시작 전"
+    elif now.hour == 9 and now.minute < 10:
+        ctx = "장 초반-시초가 형성 중(09:00~09:10)"
+    elif now.hour < 10:
+        ctx = "장 초반(09:10~10:00)"
+    elif now.hour < 15 or (now.hour == 15 and now.minute <= 30):
+        ctx = "장중"
+    else:
+        ctx = "장 마감 후"
+
+    return time_str, ctx
 
 load_dotenv()
 
@@ -113,12 +138,24 @@ def analyze_morning_brief(
     usdkrw_val = fx.get("달러/원", {}).get("value", 0)
     usdkrw_str = f"{usdkrw_val:,.0f}" if usdkrw_val else "데이터없음"
 
+    # 원자재 데이터 포맷
+    commodities = overseas_market.get("commodities", {})
+    commodity_str = "\n".join(
+        f"- {name}: {d.get('value', 0):,.2f} ({d['signal']}{d.get('change_pct', 0):+.2f}%)"
+        for name, d in commodities.items() if d
+    ) or "데이터 없음"
+
+    # 투자자별 수급 포맷
+    investor_trend = overseas_market.get("investor_trend", {})
+    investor_str = _format_investor_trend(investor_trend)
+
     # 후보 종목 — 전달받지 않으면 스크리너 직접 실행
     if candidates is None:
         print("종목 후보 스크리닝 중...")
         candidates = screen_candidates(news_list)
 
     candidates_str = format_candidates_for_prompt(candidates)
+    current_time, time_context = _get_time_context()
 
     prompt = MORNING_BRIEF_PROMPT.format(
         overseas_market=overseas_str,
@@ -128,6 +165,10 @@ def analyze_morning_brief(
         news_list=news_str,
         usdkrw=usdkrw_str,
         candidates=candidates_str,
+        current_time=current_time,
+        time_context=time_context,
+        commodities=commodity_str,
+        investor_trend=investor_str,
     )
 
     response = _call_gemini(prompt)
@@ -207,3 +248,22 @@ def _format_news_list(news_list: List[Dict]) -> str:
         source_time = f"{source} {time}".strip() if time else source
         lines.append(f"{i+1}. [{source_time}] {n['title']}")
     return "\n".join(lines)
+
+
+def _format_investor_trend(trend: Dict) -> str:
+    """투자자별 순매수 데이터 → 프롬프트용 문자열 (억원 단위)"""
+    if not trend:
+        return "데이터 없음"
+    lines = []
+    for market, d in trend.items():
+        if not isinstance(d, dict):
+            continue
+        f_val = d.get("foreigner", 0)
+        i_val = d.get("institution", 0)
+        p_val = d.get("individual", 0)
+        f_sig = "▲" if f_val > 0 else "▼" if f_val < 0 else "━"
+        i_sig = "▲" if i_val > 0 else "▼" if i_val < 0 else "━"
+        lines.append(
+            f"- {market}: 외국인 {f_sig}{f_val:+,d}억 | 기관 {i_sig}{i_val:+,d}억 | 개인 {-f_val - i_val:+,d}억"
+        )
+    return "\n".join(lines) if lines else "데이터 없음"

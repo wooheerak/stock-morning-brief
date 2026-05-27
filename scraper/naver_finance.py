@@ -231,6 +231,91 @@ def fetch_sector_news(sector_code: str = "005", count: int = 10) -> List[Dict]:
     return articles
 
 
+def _parse_investor_val(v) -> int:
+    """순매수/순매도 값 → 억원 정수. 파싱 불가 시 0."""
+    try:
+        return int(str(v).replace(",", "").replace("+", "").strip())
+    except (ValueError, TypeError):
+        return 0
+
+
+def fetch_investor_trend() -> Dict:
+    """전일 투자자별 순매수 (코스피/코스닥, 억원 단위).
+
+    네이버 모바일 API를 우선 시도하고, 실패 시 HTML 파싱으로 폴백.
+    두 방법 모두 실패하면 빈 dict 반환 (브리핑은 계속 진행).
+    """
+    result: Dict = {}
+
+    # ── 방법 1: 네이버 모바일 JSON API ─────────────────────────
+    for market, code in _KR_INDICES.items():
+        try:
+            url = f"https://m.stock.naver.com/api/index/{code}/investorTrend"
+            resp = requests.get(url, headers=HEADERS, timeout=10)
+            resp.raise_for_status()
+            data = resp.json()
+
+            # 리스트 또는 dict 대응
+            trade_list = data if isinstance(data, list) else data.get("tradeList", data.get("list", []))
+            if not trade_list:
+                continue
+
+            latest = trade_list[0] if isinstance(trade_list, list) else trade_list
+            foreigner   = _parse_investor_val(latest.get("foreignerNetTradingValue",   "0"))
+            institution = _parse_investor_val(latest.get("institutionNetTradingValue", "0"))
+            individual  = _parse_investor_val(latest.get("individualNetTradingValue",  "0"))
+
+            if foreigner == 0 and institution == 0 and individual == 0:
+                continue   # 의미 없는 0값이면 건너뜀
+
+            result[market] = {
+                "foreigner":   foreigner,
+                "institution": institution,
+                "individual":  individual,
+            }
+        except Exception:
+            pass  # 조용히 실패 → 폴백
+
+    # ── 방법 2: HTML 파싱 폴백 ──────────────────────────────────
+    if not result:
+        try:
+            url = "https://finance.naver.com/sise/investorDealTrendDay.naver"
+            resp = requests.get(url, headers=HEADERS, timeout=10)
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "lxml")
+
+            table = soup.select_one("table.type_1")
+            if table:
+                rows = table.select("tr")
+                for row in rows:
+                    tds = row.select("td")
+                    # 날짜 포함 최소 7개 컬럼 (코스피3 + 코스닥3 + α)
+                    if len(tds) >= 7:
+                        texts = [td.get_text(strip=True) for td in tds]
+                        # 첫 컬럼이 날짜(MM/DD)인 행을 사용
+                        if re.match(r'\d{2}/\d{2}', texts[0]):
+                            result["코스피"] = {
+                                "foreigner":   _parse_investor_val(texts[1]),
+                                "institution": _parse_investor_val(texts[2]),
+                                "individual":  _parse_investor_val(texts[3]),
+                            }
+                            result["코스닥"] = {
+                                "foreigner":   _parse_investor_val(texts[4]),
+                                "institution": _parse_investor_val(texts[5]),
+                                "individual":  _parse_investor_val(texts[6]),
+                            }
+                            break
+        except Exception as e:
+            print(f"[네이버 수급] HTML 파싱 실패: {e}")
+
+    if result:
+        print(f"  [네이버 수급] 수집 완료: {list(result.keys())}")
+    else:
+        print("  [네이버 수급] 수집 실패 (브리핑 계속)")
+
+    return result
+
+
 if __name__ == "__main__":
     news = fetch_market_news(5)
     for n in news:

@@ -28,6 +28,12 @@ BONDS = {
     "미국채10년물": "^TNX",
 }
 
+COMMODITIES = {
+    "WTI원유": "CL=F",    # $/barrel
+    "금":      "GC=F",    # $/oz
+    "구리":    "HG=F",    # $/lb
+}
+
 
 def _get_change(ticker: str) -> Dict:
     data = yf.Ticker(ticker)
@@ -97,6 +103,13 @@ def fetch_overnight_summary() -> Dict:
     for name, ticker in BONDS.items():
         try:
             result["bonds"][name] = _get_bond_change(ticker)
+        except Exception as e:
+            print(f"[야후파이낸스] {name} 실패: {e}")
+
+    result["commodities"] = {}
+    for name, ticker in COMMODITIES.items():
+        try:
+            result["commodities"][name] = _get_change(ticker)
         except Exception as e:
             print(f"[야후파이낸스] {name} 실패: {e}")
 

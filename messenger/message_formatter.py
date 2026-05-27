@@ -126,6 +126,33 @@ def format_morning_brief(
     if fx_parts:
         lines.append("  💱 " + " | ".join(fx_parts))
 
+    # 원자재
+    commodities = overseas.get("commodities", {})
+    if commodities:
+        comm_parts = []
+        for name, d in commodities.items():
+            if d and "change_pct" in d:
+                comm_parts.append(f"{name} {d['signal']}{d['change_pct']:+.1f}%")
+        if comm_parts:
+            lines.append("  🛢️ " + " | ".join(comm_parts))
+
+    # 투자자별 수급
+    investor_trend = overseas.get("investor_trend", {})
+    if investor_trend:
+        trend_parts = []
+        for market, d in investor_trend.items():
+            if not isinstance(d, dict):
+                continue
+            f_val = d.get("foreigner", 0)
+            i_val = d.get("institution", 0)
+            f_sig = "▲" if f_val > 0 else "▼" if f_val < 0 else "━"
+            i_sig = "▲" if i_val > 0 else "▼" if i_val < 0 else "━"
+            trend_parts.append(
+                f"{market} 외국인{f_sig}{f_val:+,d}억 기관{i_sig}{i_val:+,d}억"
+            )
+        if trend_parts:
+            lines.append("  👥 전일수급 " + " | ".join(trend_parts))
+
     # 국내 지수 — 장중/전일종가 동적 라벨
     if korean_market:
         # 메타 키(_로 시작) 제외하고 지수 데이터만 추출

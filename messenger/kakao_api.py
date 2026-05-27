@@ -35,12 +35,25 @@ def refresh_access_token() -> dict:
 
         new_access = token_data.get("access_token", "")
         new_refresh = token_data.get("refresh_token", "")  # 30일 이내 만료 시에만 반환
+        refresh_expires_in = token_data.get("refresh_token_expires_in", 0)  # 초 단위
+
+        # 리프레시 토큰 만료 임박 경고
+        if refresh_expires_in:
+            days_left = int(refresh_expires_in) // 86400
+            if days_left < 7:
+                print(f"🚨 [카카오] 리프레시 토큰 만료까지 {days_left}일 — GH_PAT 없으면 수동 갱신 필요!")
+            elif days_left < 20:
+                print(f"⚠️  [카카오] 리프레시 토큰 {days_left}일 남음 (자동 갱신 예정)")
+            else:
+                print(f"  [카카오] 리프레시 토큰 잔여: {days_left}일")
 
         # GitHub Actions workflow가 읽어서 Secrets 업데이트하는 캐시 파일
         with open(TOKEN_CACHE, "w") as f:
             f.write(f"KAKAO_ACCESS_TOKEN={new_access}\n")
             if new_refresh:
                 f.write(f"KAKAO_REFRESH_TOKEN={new_refresh}\n")
+            if refresh_expires_in:
+                f.write(f"KAKAO_REFRESH_EXPIRES_IN={refresh_expires_in}\n")
 
         msg = "[카카오] 액세스 토큰 갱신 완료"
         if new_refresh:

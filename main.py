@@ -31,7 +31,7 @@ def _filter_recent_news(news_list: list, max_hours: int = 36) -> list:
         print(f"  → 오래된 뉴스 {dropped}건 제외 (36시간 초과)")
     return kept
 
-from scraper.naver_finance import fetch_market_news as naver_news, fetch_korean_index
+from scraper.naver_finance import fetch_market_news as naver_news, fetch_korean_index, fetch_investor_trend
 from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
 from scraper.validator import validate_market_data
@@ -71,6 +71,10 @@ def run_morning_brief():
     print("시장 데이터 수집 중...")
     overseas = fetch_overnight_summary()
     korean = fetch_korean_index()
+
+    # 투자자별 수급 수집 (전일 외국인/기관 순매수)
+    print("투자자 수급 수집 중...")
+    overseas["investor_trend"] = fetch_investor_trend()
 
     # 국내 지수 이중 검증 결과 출력 (내부 일관성 + yfinance 교차)
     for w in korean.get("_warnings", []):

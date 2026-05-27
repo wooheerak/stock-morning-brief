@@ -38,6 +38,31 @@ jobs:
           KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
         run: python main.py
 
+      - name: 카카오 리프레시 토큰 GitHub Secret 자동 갱신
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          # GH_PAT 미설정 시 건너뜀 (선택적 기능)
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "  [카카오] GH_PAT 미설정 — Secret 자동 갱신 건너뜀"
+            echo "  (설정 방법: GitHub → Settings → Secrets → GH_PAT 추가, repo+secrets 권한)"
+            exit 0
+          fi
+          CACHE_FILE=$(python3 -c "import tempfile; print(tempfile.gettempdir())")/kakao_new_tokens.env
+          if [ ! -f "$CACHE_FILE" ]; then
+            echo "  [카카오] 토큰 캐시 없음 (토큰 갱신 실패 또는 불필요)"
+            exit 0
+          fi
+          # shellcheck disable=SC1090
+          set -a; source "$CACHE_FILE"; set +a
+          if [ -n "${KAKAO_REFRESH_TOKEN:-}" ]; then
+            printf '%s' "$KAKAO_REFRESH_TOKEN" | gh secret set KAKAO_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY"
+            echo "  [카카오] KAKAO_REFRESH_TOKEN GitHub Secret 자동 갱신 완료"
+          else
+            echo "  [카카오] 리프레시 토큰 미갱신 (유효기간 여유 있음)"
+          fi
+
       - name: 성과 로그 자동 커밋
         run: |
           git config user.name  "github-actions[bot]"
