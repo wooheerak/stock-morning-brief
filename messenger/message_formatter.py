@@ -97,8 +97,17 @@ def format_morning_brief(
         lines.append("─" * 18)
         lines.append("")
 
-    # 시장심리 + 산식
-    lines.append(f"시장심리: {s_emoji} {sentiment} {score}점")
+    # 시장심리 + 시장폭
+    breadth_info = analysis.get("_breadth_info", {})
+    if breadth_info:
+        bs = breadth_info.get("breadth_score", "")
+        bl = breadth_info.get("breadth_label", "")
+        rs = breadth_info.get("risk_score", "")
+        rl = breadth_info.get("risk_label", "")
+        breadth_str = f"  폭 {bs}({bl}) | 리스크 {rs}({rl})"
+    else:
+        breadth_str = ""
+    lines.append(f"시장심리: {s_emoji} {sentiment} {score}점{breadth_str}")
     if breakdown:
         lines.append(f"  └ {_cut(breakdown, 110)}")
 

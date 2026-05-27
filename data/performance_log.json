@@ -106,5 +106,17 @@
     "perf_1d": null,
     "perf_3d": null,
     "perf_5d": null
+  },
+  {
+    "date": "2026-05-27",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "필라델피아반도체 급등 및 AI 반도체 모멘텀 지속",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]

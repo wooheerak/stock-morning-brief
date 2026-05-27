@@ -19,6 +19,9 @@ AI 생성 느낌이 나지 않도록 실제 금융 브리핑 스타일로 자연
 ### 전일 투자자별 순매수 (억원)
 {investor_trend}
 
+### 시장폭(Breadth) 분석 [시스템 산출 — 참고 필수]
+{breadth_data}
+
 ### 현재 달러/원 환율
 {usdkrw}원 (체크포인트 등 환율 수준 언급 시 반드시 이 수치 기반으로 작성)
 
@@ -124,6 +127,7 @@ AI 생성 느낌이 나지 않도록 실제 금융 브리핑 스타일로 자연
 - 투자 최종 결정은 사용자 본인임을 전략 문장에 명시 불필요 (별도 고지 있음)
 - checkpoints의 환율 저항선/지지선은 반드시 실제 달러/원({usdkrw}원) 기반으로 설정. 현재 환율과 100원 이상 괴리된 임의 수치 사용 금지
 - 원자재 데이터(WTI·금·구리)와 외국인 수급은 시장 해석과 섹터 판단에 반영하되, 데이터 없음이면 언급하지 말 것
+- 시장폭(Breadth) 분석 가이드라인: 입력된 breadth_data의 섹터 가이드라인(⚠️ 표시)을 반드시 준수할 것
 - paper_trading_signals 는 반드시 short_term_stocks 에 등장한 종목과 동일 코드만 사용. 후보 없으면 빈 배열
 - paper_trading_signals.virtual_entry_allowed: SKIP이면 반드시 false, BUY면 반드시 true, WATCH는 confidence≥60이면 true
 - paper_trading_signals.take_profit_pct 는 양수, stop_loss_pct 는 음수여야 함

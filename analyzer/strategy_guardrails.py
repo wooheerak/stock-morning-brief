@@ -79,15 +79,28 @@ def _correct_sentiment_score(
     score: int,
     kospi_pct: float,
     kosdaq_pct: float,
+    breadth_score: int = 50,
+    risk_score: int = 30,
 ) -> Tuple[int, Optional[str]]:
     """
-    실제 지수 방향과 과도하게 괴리된 심리점수를 보정한다.
+    실제 지수 방향·시장폭과 과도하게 괴리된 심리점수를 보정한다.
 
-    규칙 (floor/ceiling):
-    - 코스피 > +2%: score 최소 40 (경계 하한)
-    - 코스피 > +1%: score 최소 36
-    - 코스피 < -2%: score 최대 52 (과도 낙관 방지)
-    - 코스피/코스닥 모두 양수: score 최소 38
+    우선순위
+    --------
+    1. 시장폭(Breadth) 기반 ceiling  ← 신규 (좁은 장세에서 과도 낙관 방지)
+    2. 시장 방향 기반 floor / ceiling
+
+    규칙:
+    [Breadth ceiling]
+    - breadth < 25 → ceiling 45  (매우좁음: 반도체 1~2개만 오르는 장)
+    - breadth < 40 AND risk ≥ 65 → ceiling 48
+    - breadth < 40 → ceiling 52
+
+    [Market direction floor/ceiling]
+    - 코스피 > +2%: floor 40
+    - 코스피 > +1%: floor 36
+    - 코스피/코스닥 모두 양수: floor 38
+    - 코스피 < -2%: ceiling 52
 
     Returns
     -------
@@ -96,16 +109,28 @@ def _correct_sentiment_score(
     corrected = score
     reason: Optional[str] = None
 
-    if kospi_pct > 2.0 and score < 40:
+    # ── 1순위: 시장폭 기반 ceiling ───────────────────────────────────────
+    if breadth_score < 25 and corrected > 45:
+        corrected = 45
+        reason = f"시장폭 {breadth_score}점(매우좁음) → ceiling 45"
+    elif breadth_score < 40 and risk_score >= 65 and corrected > 48:
+        corrected = 48
+        reason = f"시장폭 {breadth_score}점(좁음)·리스크 {risk_score}점 → ceiling 48"
+    elif breadth_score < 40 and corrected > 52:
+        corrected = 52
+        reason = f"시장폭 {breadth_score}점(좁음) → ceiling 52"
+
+    # ── 2순위: 시장 방향 floor/ceiling (breadth ceiling 미발동 시만) ──────
+    elif kospi_pct > 2.0 and corrected < 40:
         corrected = 40
         reason = f"코스피 {kospi_pct:+.1f}% 상승 → floor 40"
-    elif kospi_pct > 1.0 and score < 36:
+    elif kospi_pct > 1.0 and corrected < 36:
         corrected = 36
         reason = f"코스피 {kospi_pct:+.1f}% 상승 → floor 36"
-    elif kospi_pct > 0 and kosdaq_pct > 0 and score < 38:
+    elif kospi_pct > 0 and kosdaq_pct > 0 and corrected < 38:
         corrected = 38
         reason = f"코스피/코스닥 모두 양수 → floor 38"
-    elif kospi_pct < -2.0 and score > 52:
+    elif kospi_pct < -2.0 and corrected > 52:
         corrected = 52
         reason = f"코스피 {kospi_pct:+.1f}% 하락 → ceiling 52"
 
@@ -161,13 +186,20 @@ def apply_strategy_guardrails(
     current_label = analysis.get("strategy_stance", {}).get("label", "관망")
     current_level = _LEVELS.get(current_label, 1)
 
+    # 시장폭 정보 (analyze_morning_brief가 주입한 _breadth_info)
+    breadth_info  = analysis.get("_breadth_info", {})
+    breadth_score = int(breadth_info.get("breadth_score", 50))
+    risk_score_b  = int(breadth_info.get("risk_score", 30))
+
     try:
         brief_hour = int(briefing_time.split(":")[0]) if briefing_time else 0
     except Exception:
         brief_hour = 0
 
     # ── 1. 심리점수 보정 ─────────────────────────────────────────────────
-    corrected_score, score_reason = _correct_sentiment_score(score, kospi_pct, kosdaq_pct)
+    corrected_score, score_reason = _correct_sentiment_score(
+        score, kospi_pct, kosdaq_pct, breadth_score, risk_score_b
+    )
     score_changed = corrected_score != score
     if score_changed:
         analysis["sentiment_score"] = corrected_score

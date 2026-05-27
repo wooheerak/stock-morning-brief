@@ -8,6 +8,7 @@ from google.genai import errors as genai_errors
 from dotenv import load_dotenv
 from .prompts import MORNING_BRIEF_PROMPT, WATCHLIST_ANALYSIS_PROMPT, STOCK_QUERY_PROMPT
 from .schemas import MorningBriefAnalysis
+from .market_breadth import compute_market_breadth, format_breadth_for_prompt
 
 _KST = timezone(timedelta(hours=9))
 
@@ -149,6 +150,15 @@ def analyze_morning_brief(
     investor_trend = overseas_market.get("investor_trend", {})
     investor_str = _format_investor_trend(investor_trend)
 
+    # 시장폭(Breadth) 분석 — Gemini 프롬프트 주입 + 분석 dict 보강용
+    breadth_info = compute_market_breadth(overseas_market, korean_market)
+    breadth_str  = format_breadth_for_prompt(breadth_info)
+    print(
+        f"  [Breadth] 폭 {breadth_info['breadth_score']}({breadth_info['breadth_label']}) "
+        f"리스크 {breadth_info['risk_score']}({breadth_info['risk_label']}) "
+        f"괴리 {breadth_info['divergence']:.1f}%p"
+    )
+
     # 후보 종목 — 전달받지 않으면 스크리너 직접 실행
     if candidates is None:
         print("종목 후보 스크리닝 중...")
@@ -169,11 +179,17 @@ def analyze_morning_brief(
         time_context=time_context,
         commodities=commodity_str,
         investor_trend=investor_str,
+        breadth_data=breadth_str,
     )
 
     response = _call_gemini(prompt)
     raw = _parse_json_response(response)
-    return _validate_analysis(raw)
+    result = _validate_analysis(raw)
+
+    # 시장폭 정보를 분석 결과에 주입 (가드레일·포맷터에서 사용)
+    result["_breadth_info"] = breadth_info
+
+    return result
 
 
 def analyze_watchlist(

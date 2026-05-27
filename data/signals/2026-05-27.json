@@ -1,17 +1,29 @@
 {
   "date": "2026-05-27",
-  "time": "15:23",
-  "market_sentiment_score": 59,
-  "strategy": "관망",
-  "cash_ratio": "50~60%",
+  "time": "16:35",
+  "market_sentiment_score": 46,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
   "watch_sectors": [
     "반도체",
-    "조선",
-    "바이오"
+    "조선"
   ],
   "avoid_sectors": [
-    "유통",
-    "소형주"
+    "바이오",
+    "게임",
+    "중소형성장"
   ],
-  "candidates": []
+  "candidates": [
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 65
+    }
+  ]
 }
