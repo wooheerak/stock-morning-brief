@@ -35,21 +35,25 @@ _CRITICAL_ITEMS = {"나스닥", "S&P500", "달러/원", "코스피", "코스닥"
 
 
 def _check_item(name: str, d: Dict, warnings: List[str]) -> bool:
-    """단일 항목 검증. 치명 오류면 False 반환."""
+    """단일 항목 검증.
+    - 수집 실패(빈 데이터): 항상 경고만 (치명 X) — 데이터 없어도 브리핑은 발송
+    - 값 범위 이탈: 치명 오류 가능 (파싱 오류 의심)
+    반환값: False = 치명 오류, True = 정상 또는 경고만
+    """
     if not d:
         warnings.append(f"⚠️  {name}: 수집 실패 (빈 데이터)")
-        return False
+        return True   # 수집 실패는 경고만, 브리핑 계속
 
     val = d.get("value", 0)
 
-    # 값 범위 체크
+    # 값 범위 체크 — 수집은 됐지만 값이 비정상 (파싱 오류)
     rng = _RANGES.get(name)
     if rng and not (rng[0] <= val <= rng[1]):
         warnings.append(
             f"🚨 {name}: 비정상 값 {val:,.2f}"
             f"  (정상 범위 {rng[0]:,} ~ {rng[1]:,}) — 파싱 오류 의심"
         )
-        return False
+        return False   # 값 이상만 치명 오류
 
     # 변동률 이상치 (경고만, 치명 X)
     change_pct = abs(d.get("change_pct", 0))

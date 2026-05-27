@@ -65,7 +65,7 @@ def send_to_me(message: str) -> bool:
         "Content-Type": "application/x-www-form-urlencoded",
     }
 
-    messages = _split_message(message, max_length=1900)
+    messages = _split_message(message, max_length=900)
 
     # 서비스 URL: 환경변수 우선, 없으면 GitHub 레포로 폴백
     service_url = os.getenv(
