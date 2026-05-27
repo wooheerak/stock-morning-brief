@@ -1,6 +1,8 @@
 import yfinance as yf
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict
+
+_KST = timezone(timedelta(hours=9))
 
 MAJOR_INDICES = {
     "나스닥": "^IXIC",
@@ -64,7 +66,7 @@ def _get_bond_change(ticker: str) -> Dict:
 
 def fetch_overnight_summary() -> Dict:
     """미국 시장 오버나이트 요약 (지수 + 주요 종목 + 환율)"""
-    fetch_time = datetime.now().strftime("%Y/%m/%d %H:%M")
+    fetch_time = datetime.now(_KST).strftime("%Y/%m/%d %H:%M")
     result = {
         "indices": {},
         "stocks": {},

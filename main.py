@@ -12,6 +12,7 @@ def _now_kst() -> datetime:
 from scraper.naver_finance import fetch_market_news as naver_news, fetch_korean_index
 from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
+from scraper.validator import validate_market_data
 from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
 from messenger.message_formatter import format_morning_brief, format_watchlist_brief
 from messenger.kakao_api import send_to_me, refresh_access_token
@@ -46,11 +47,15 @@ def run_morning_brief():
     overseas = fetch_overnight_summary()
     korean = fetch_korean_index()
 
-    # 데이터 검증 (파싱 오류 감지: 0이거나 비정상적으로 낮은 경우만 차단)
-    kospi_val = korean.get("코스피", {}).get("value", 0)
-    if kospi_val and kospi_val < 500:
+    # 데이터 검증 (범위 이탈 / 파싱 오류 / 수집 실패 통합 체크)
+    print("데이터 검증 중...")
+    critical_error, warnings = validate_market_data(overseas, korean)
+    for w in warnings:
+        print(f"  {w}")
+    if critical_error:
         raise ValueError(
-            f"[데이터 검증 실패] 코스피 {kospi_val:,.2f}p — 비정상 저값 (파싱 오류 의심). 브리핑 중단."
+            "[데이터 검증 실패] 핵심 시장 데이터 이상 감지 — 브리핑 중단.\n"
+            + "\n".join(warnings)
         )
 
     # 2. AI 분석
@@ -96,9 +101,11 @@ if __name__ == "__main__":
         news = naver_news(20) + hankyung_news(15)
         overseas = fetch_overnight_summary()
         korean = fetch_korean_index()
-        kospi_val = korean.get("코스피", {}).get("value", 0)
-        if kospi_val and kospi_val < 500:
-            raise ValueError(f"[데이터 검증 실패] 코스피 {kospi_val:,.2f}p — 비정상 저값 (파싱 오류 의심).")
+        critical_error, warnings = validate_market_data(overseas, korean)
+        for w in warnings:
+            print(f"  {w}")
+        if critical_error:
+            raise ValueError("[데이터 검증 실패] 핵심 시장 데이터 이상 감지.\n" + "\n".join(warnings))
         analysis = analyze_morning_brief(overseas, korean, news)
         message = format_morning_brief(analysis, overseas, korean)
         sys.stdout.buffer.write((message + f"\n\n[문자 수: {len(message)}자]\n").encode("utf-8"))

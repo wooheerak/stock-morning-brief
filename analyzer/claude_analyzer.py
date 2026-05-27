@@ -6,6 +6,7 @@ from google import genai
 from google.genai import errors as genai_errors
 from dotenv import load_dotenv
 from .prompts import MORNING_BRIEF_PROMPT, WATCHLIST_ANALYSIS_PROMPT, STOCK_QUERY_PROMPT
+from .schemas import MorningBriefAnalysis
 
 load_dotenv()
 
@@ -67,6 +68,28 @@ def _parse_json_response(text: str) -> Dict:
     return json.loads(text[start:end])
 
 
+def _validate_analysis(raw: Dict) -> Dict:
+    """Pydantic 스키마로 분석 결과 검증. 오류 시 기본값 폴백."""
+    try:
+        validated = MorningBriefAnalysis.model_validate(raw)
+        result = validated.model_dump()
+
+        # 검증 중 제거된 종목 로그
+        orig_short = len(raw.get("short_term_stocks", []))
+        orig_mid = len(raw.get("mid_term_stocks", []))
+        final_short = len(result["short_term_stocks"])
+        final_mid = len(result["mid_term_stocks"])
+        if orig_short != final_short:
+            print(f"  [스키마 검증] 단기 종목 {orig_short}→{final_short}개 (코드 불명/초과 제거)")
+        if orig_mid != final_mid:
+            print(f"  [스키마 검증] 중기 종목 {orig_mid}→{final_mid}개 (코드 불명/초과 제거)")
+
+        return result
+    except Exception as e:
+        print(f"  [스키마 검증] 경고: {e} — 원본 데이터 사용")
+        return raw
+
+
 def analyze_morning_brief(
     overseas_market: Dict,
     korean_market: Dict,
@@ -97,7 +120,8 @@ def analyze_morning_brief(
     )
 
     response = _call_gemini(prompt)
-    return _parse_json_response(response)
+    raw = _parse_json_response(response)
+    return _validate_analysis(raw)
 
 
 def analyze_watchlist(
