@@ -39,7 +39,7 @@ from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
 from analyzer.performance_tracker import save_recommendations, evaluate_and_update
 from trading.signal_parser import parse_and_save as save_signal
 from trading.paper_trader import evaluate_date, get_last_trading_date
-from trading.performance_tracker import get_summary as pt_summary
+from trading.performance_tracker import get_summary as pt_summary, format_daily_result_for_message
 from messenger.message_formatter import format_morning_brief, format_watchlist_brief
 from messenger.kakao_api import send_to_me, refresh_access_token
 
@@ -95,7 +95,7 @@ def run_morning_brief():
         )
 
     # 2. AI 분석
-    print("Claude AI 분석 중...")
+    print("Gemini AI 분석 중...")
     analysis = analyze_morning_brief(overseas, korean, news)
 
     # 3. 메시지 포맷
@@ -136,6 +136,11 @@ def run_morning_brief():
 
     # 누적 성과 리포트 (20거래일)
     print(pt_summary(days=20))
+
+    # 전일 페이퍼트레이딩 결과 메시지 하단에 추가
+    pt_msg = format_daily_result_for_message(prev_date)
+    if pt_msg:
+        message = message + "\n\n" + pt_msg
 
     # 6. 카카오톡 발송
     print(f"메시지 총 길이: {len(message)}자")

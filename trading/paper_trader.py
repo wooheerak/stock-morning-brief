@@ -78,10 +78,10 @@ def _evaluate_trade(
     hit_sl = ohlc["low"]  <= sl_price
 
     if hit_tp and hit_sl:
-        # 둘 다 걸린 경우 — TP 우선 (장 초반 갭 상승 후 익절 가능성)
-        exit_price  = round(tp_price)
-        exit_reason = "TAKE_PROFIT"
-        result      = "WIN"
+        # 일봉 OHLC에서는 고저 발생 순서 불명 → 보수적 검증: 손절 우선
+        exit_price  = round(sl_price)
+        exit_reason = "STOP_LOSS"
+        result      = "LOSS"
     elif hit_tp:
         exit_price  = round(tp_price)
         exit_reason = "TAKE_PROFIT"
@@ -116,6 +116,18 @@ def evaluate_date(trade_date: str) -> List[TradeResult]:
     signal: Optional[DailySignal] = load_signal(trade_date)
     if signal is None:
         print(f"  [페이퍼트레이딩] {trade_date} 시그널 없음 — 건너뜀")
+        return []
+
+    # 장중 브리핑 체크 (09:00~15:30 사이 생성된 시그널은 시가 진입 불가)
+    try:
+        h, m = map(int, signal.time.split(":"))
+        is_intraday = (9 <= h < 15) or (h == 15 and m <= 30)
+    except Exception:
+        is_intraday = False
+
+    if is_intraday:
+        print(f"  [페이퍼트레이딩] {trade_date} {signal.time} 장중 브리핑 "
+              f"— 시가 진입 불가, 평가 건너뜀 (사유: 과거 시가 역산 왜곡)")
         return []
 
     results: List[TradeResult] = []

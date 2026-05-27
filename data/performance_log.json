@@ -94,5 +94,17 @@
     "perf_1d": null,
     "perf_3d": null,
     "perf_5d": null
+  },
+  {
+    "date": "2026-05-27",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "글로벌 반도체 업황 강세, HBM 수요 기대, 시장 주도주로서의 수급 집중.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]

@@ -151,3 +151,42 @@ def get_summary(days: int = 20) -> str:
 def get_metrics(days: int = 20) -> Dict:
     """원시 지표 dict 반환 (외부 활용용)."""
     return _calc_metrics(load_all_results(days))
+
+
+def format_daily_result_for_message(date: str) -> str:
+    """특정 거래일 페이퍼트레이딩 결과 → 카카오 메시지 삽입용 문자열.
+    결과 없으면 빈 문자열 반환.
+    """
+    result_path = os.path.join(_RESULTS_DIR, f"{date}.json")
+    if not os.path.exists(result_path):
+        return ""
+    try:
+        with open(result_path, "r", encoding="utf-8") as f:
+            results = json.load(f)
+
+        closed = [r for r in results if r.get("result") in {"WIN", "LOSS", "DRAW"}]
+        if not closed:
+            return ""
+
+        lines = [f"[{date} 페이퍼트레이딩]"]
+        for r in closed:
+            tag   = "WIN" if r["result"] == "WIN" else "LOSS" if r["result"] == "LOSS" else " -- "
+            ret   = r.get("return_rate", 0)
+            why   = {"TAKE_PROFIT": "익절", "STOP_LOSS": "손절", "EOD": "종가청산"}.get(
+                r.get("exit_reason", ""), r.get("exit_reason", ""))
+            lines.append(f"  [{tag}] {r['name']}: {ret:+.1f}% ({why})")
+
+        wins  = sum(1 for r in closed if r["result"] == "WIN")
+        lines.append(f"  {wins}/{len(closed)} 승")
+
+        # 20거래일 누적 지표 (데이터 충분할 때만)
+        m = _calc_metrics(load_all_results(20))
+        if m and m["total_trades"] >= 5:
+            lines.append(
+                f"  [누적20일] 승률{m['win_rate']}% "
+                f"손익비{m['profit_factor']} MDD{m['mdd_pct']:+.1f}%"
+            )
+
+        return "\n".join(lines)
+    except Exception:
+        return ""
