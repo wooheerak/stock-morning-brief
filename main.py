@@ -37,6 +37,9 @@ from scraper.yahoo_finance import fetch_overnight_summary
 from scraper.validator import validate_market_data
 from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
 from analyzer.performance_tracker import save_recommendations, evaluate_and_update
+from trading.signal_parser import parse_and_save as save_signal
+from trading.paper_trader import evaluate_date, get_last_trading_date
+from trading.performance_tracker import get_summary as pt_summary
 from messenger.message_formatter import format_morning_brief, format_watchlist_brief
 from messenger.kakao_api import send_to_me, refresh_access_token
 
@@ -111,12 +114,28 @@ def run_morning_brief():
         watchlist_message = format_watchlist_brief(watchlist_result, all_watchlist)
         message = message + "\n\n" + watchlist_message
 
-    # 5. 성과 추적 — 오늘 추천 저장 + 과거 성과 평가
+    # 5. 성과 추적
     brief_date = _now_kst().strftime("%Y-%m-%d")
+    brief_time = _now_kst().strftime("%H:%M")
+
+    # 기존 단순 성과 로그 (performance_log.json)
     save_recommendations(analysis, brief_date)
     perf_summary = evaluate_and_update()
     if perf_summary:
         print(perf_summary)
+
+    # 페이퍼 트레이딩 — 오늘 시그널 저장
+    print("페이퍼 트레이딩 시그널 저장 중...")
+    save_signal(analysis, brief_date, brief_time)
+
+    # 전 거래일 시그널 평가 (장 마감 가격으로)
+    prev_date = get_last_trading_date(brief_date)
+    if prev_date != brief_date:
+        print(f"전일({prev_date}) 페이퍼 트레이딩 결과 평가 중...")
+        evaluate_date(prev_date)
+
+    # 누적 성과 리포트 (20거래일)
+    print(pt_summary(days=20))
 
     # 6. 카카오톡 발송
     print(f"메시지 총 길이: {len(message)}자")

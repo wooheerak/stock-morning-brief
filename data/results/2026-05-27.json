@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-05-27",
+    "code": "000660",
+    "name": "SK하이닉스",
+    "entry_price": 2279000.0,
+    "exit_price": 2347370.0,
+    "return_rate": 3.0,
+    "result": "WIN",
+    "exit_reason": "TAKE_PROFIT",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "BUY",
+    "confidence": 72,
+    "open_price": 2279000.0,
+    "high_price": 2358000.0,
+    "low_price": 2200000.0,
+    "close_price": 2311000.0
+  }
+]

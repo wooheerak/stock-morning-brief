@@ -96,7 +96,20 @@ AI 생성 느낌이 나지 않도록 실제 금융 브리핑 스타일로 자연
       "20자 이내. 예: 외국인 순매도 지속 여부",
       "20자 이내. 예: SK하이닉스·삼성전자 반등"
     ]
-  }}
+  }},
+  "paper_trading_signals": [
+    {{
+      "code": "short_term_stocks 와 동일한 6자리 코드. 후보 없으면 빈 배열",
+      "name": "종목명",
+      "action": "BUY(적극 매수 시도) 또는 WATCH(조건부 관찰) 또는 SKIP(금일 거래 부적합) 중 하나",
+      "entry_type": "OPEN(시가 진입) 또는 PULLBACK(눌림목 확인 후) 또는 BREAKOUT(전고점 돌파 시) 중 하나",
+      "virtual_entry_allowed": "BUY 또는 WATCH(신뢰도≥60)면 true, SKIP이면 false",
+      "take_profit_pct": "익절 비율 양수 숫자. 기본 3.0. 예: 3.0",
+      "stop_loss_pct": "손절 비율 음수 숫자. 기본 -2.0. 예: -2.0",
+      "holding_period": "DAY(당일 청산) — 현재는 DAY만 지원",
+      "confidence": "0~100 정수. 시장 심리 점수, 뉴스 강도, 거래량 배율 종합 신뢰도"
+    }}
+  ]
 }}
 
 ## 주의사항
@@ -111,6 +124,9 @@ AI 생성 느낌이 나지 않도록 실제 금융 브리핑 스타일로 자연
 - 투자 최종 결정은 사용자 본인임을 전략 문장에 명시 불필요 (별도 고지 있음)
 - checkpoints의 환율 저항선/지지선은 반드시 실제 달러/원({usdkrw}원) 기반으로 설정. 현재 환율과 100원 이상 괴리된 임의 수치 사용 금지
 - 원자재 데이터(WTI·금·구리)와 외국인 수급은 시장 해석과 섹터 판단에 반영하되, 데이터 없음이면 언급하지 말 것
+- paper_trading_signals 는 반드시 short_term_stocks 에 등장한 종목과 동일 코드만 사용. 후보 없으면 빈 배열
+- paper_trading_signals.virtual_entry_allowed: SKIP이면 반드시 false, BUY면 반드시 true, WATCH는 confidence≥60이면 true
+- paper_trading_signals.take_profit_pct 는 양수, stop_loss_pct 는 음수여야 함
 - 국내 지수 언급 시 입력된 실제 코스피/코스닥 수치 그대로 사용. 임의로 다른 수준으로 바꾸지 말 것
 - strategy_stance.emoji: 🟢=적극매수(score≥65), 🟡=보수적매수/관망(45~64), 🔴=위험관리(score<45)
 - checkpoints: 현재 시각({current_time}, {time_context}) 이후 관찰 가능한 항목만. 이미 지난 이벤트(장 시작 전 생성 항목인 '시초가 방향'은 장중에는 금지) 절대 포함 금지

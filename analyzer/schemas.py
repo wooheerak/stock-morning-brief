@@ -4,6 +4,7 @@ Pydantic v2 스키마 — Gemini 응답 JSON 구조 검증.
 """
 from pydantic import BaseModel, Field, field_validator
 from typing import List
+import re
 
 
 class KeyIssue(BaseModel):
@@ -67,6 +68,38 @@ class QuickSummary(BaseModel):
     check_top3: List[str] = Field(default_factory=list)
 
 
+class PaperSignalItem(BaseModel):
+    """Gemini 응답 내 paper_trading_signals 원소 검증."""
+    code: str = ""
+    name: str = ""
+    action: str = "WATCH"
+    entry_type: str = "OPEN"
+    virtual_entry_allowed: bool = True
+    take_profit_pct: float = Field(default=3.0, ge=0.1, le=30.0)
+    stop_loss_pct: float = Field(default=-2.0)
+    holding_period: str = "DAY"
+    confidence: int = Field(default=50, ge=0, le=100)
+
+    @field_validator("code")
+    @classmethod
+    def check_code(cls, v: str) -> str:
+        v = str(v).strip()
+        return v if re.match(r"^\d{6}$", v) else ""
+
+    @field_validator("action")
+    @classmethod
+    def check_action(cls, v: str) -> str:
+        return v if v in {"WATCH", "BUY", "SKIP"} else "WATCH"
+
+    @field_validator("stop_loss_pct")
+    @classmethod
+    def check_stop_loss(cls, v: float) -> float:
+        """손절비율은 음수여야 함. 양수로 잘못 입력된 경우 음수 변환."""
+        if v > 0:
+            return -abs(v)
+        return max(v, -20.0)   # 최대 -20%
+
+
 class MorningBriefAnalysis(BaseModel):
     market_sentiment: str = "중립"
     sentiment_score: int = Field(default=50, ge=0, le=100)
@@ -82,6 +115,7 @@ class MorningBriefAnalysis(BaseModel):
     risk_factors: List[str] = Field(default_factory=list)
     checkpoints: List[str] = Field(default_factory=list)
     quick_summary: QuickSummary = Field(default_factory=QuickSummary)
+    paper_trading_signals: List[PaperSignalItem] = Field(default_factory=list)
 
     @field_validator("market_sentiment")
     @classmethod
@@ -99,3 +133,10 @@ class MorningBriefAnalysis(BaseModel):
     def cap_mid_stocks(cls, v: List[MidTermStock]) -> List[MidTermStock]:
         """코드 없는 종목 제거 + 최대 3개"""
         return [s for s in v if s.code][:3]
+
+    @field_validator("paper_trading_signals")
+    @classmethod
+    def cap_pt_signals(cls, v: List[PaperSignalItem]) -> List[PaperSignalItem]:
+        """코드 없는 항목 제거 + 최대 3개 (SKIP 은 신뢰도 낮은 것)"""
+        valid = [s for s in v if s.code][:3]
+        return valid
