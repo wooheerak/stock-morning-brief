@@ -1,15 +1,16 @@
 {
   "date": "2026-05-27",
-  "time": "14:27",
-  "market_sentiment_score": 65,
-  "strategy": "적극매수",
-  "cash_ratio": "20~30%",
+  "time": "15:15",
+  "market_sentiment_score": 28,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
   "watch_sectors": [
-    "반도체",
+    "AI반도체",
     "조선"
   ],
   "avoid_sectors": [
-    "코스닥 중소형"
+    "정유",
+    "바이오"
   ],
   "candidates": []
 }

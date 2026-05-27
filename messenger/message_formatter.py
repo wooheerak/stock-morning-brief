@@ -44,11 +44,25 @@ def _fmt_date(time_str: str) -> str:
     return time_str
 
 
+def _data_reliability_score(val_warnings: list) -> int:
+    """검증 경고 수 → 데이터 신뢰도 점수 (0~100)."""
+    score = 100
+    for w in val_warnings:
+        if "수집 실패" in w:
+            score -= 5
+        elif "비정상 값" in w or "파싱 오류" in w:
+            score -= 15
+        elif "불일치" in w:
+            score -= 8
+    return max(0, min(100, score))
+
+
 def format_morning_brief(
     analysis: Dict,
     overseas: Dict,
     korean_market: Dict,
     date: datetime = None,
+    val_warnings: list = None,
 ) -> str:
     if date is None:
         date = _now_kst()
@@ -255,6 +269,22 @@ def format_morning_brief(
             lines.append(f"  □ {_cut(c, 48)}")
         lines.append("")
 
+    # 데이터 신뢰도 + 가드레일 상태 footer
+    if val_warnings is None:
+        val_warnings = []
+    reliability = _data_reliability_score(val_warnings)
+    fail_items = [re.sub(r'^[\W\s]+', '', w.split(":")[0]).strip() for w in val_warnings]
+    fail_str = "(" + ", ".join(f[:8] for f in fail_items[:2]) + " 실패)" if fail_items else ""
+
+    guardrail_log = analysis.get("_guardrail_log", [])
+    guardrail_str = "적용" if guardrail_log else "미적용"
+
+    is_intraday = korean_market.get("_is_intraday", False)
+    news_label = "장중" if is_intraday else "36h이내"
+
+    lines.append(
+        f"[데이터 {reliability}점{fail_str} | 뉴스 {news_label} | 전략보정 {guardrail_str}]"
+    )
     lines.append("※ 투자 판단은 본인 결정 하에 진행하세요.")
     return "\n".join(lines)
 

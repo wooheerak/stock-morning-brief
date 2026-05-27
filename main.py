@@ -36,6 +36,7 @@ from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
 from scraper.validator import validate_market_data
 from analyzer.claude_analyzer import analyze_morning_brief, analyze_watchlist
+from analyzer.strategy_guardrails import apply_strategy_guardrails
 from analyzer.performance_tracker import save_recommendations, evaluate_and_update
 from trading.signal_parser import parse_and_save as save_signal
 from trading.paper_trader import evaluate_date, get_last_trading_date
@@ -85,21 +86,25 @@ def run_morning_brief():
 
     # 데이터 검증 (범위 이탈 / 파싱 오류 / 수집 실패 통합 체크)
     print("데이터 검증 중...")
-    critical_error, warnings = validate_market_data(overseas, korean)
-    for w in warnings:
+    critical_error, val_warnings = validate_market_data(overseas, korean)
+    for w in val_warnings:
         print(f"  {w}")
     if critical_error:
         raise ValueError(
             "[데이터 검증 실패] 핵심 시장 데이터 이상 감지 — 브리핑 중단.\n"
-            + "\n".join(warnings)
+            + "\n".join(val_warnings)
         )
 
     # 2. AI 분석
     print("Gemini AI 분석 중...")
     analysis = analyze_morning_brief(overseas, korean, news)
 
-    # 3. 메시지 포맷
-    message = format_morning_brief(analysis, overseas, korean)
+    # 2-1. 전략 가드레일 후처리 (AI 결과 보정)
+    print("전략 가드레일 적용 중...")
+    analysis = apply_strategy_guardrails(analysis, overseas, korean)
+
+    # 3. 메시지 포맷 (검증 경고 전달 → 신뢰도 footer)
+    message = format_morning_brief(analysis, overseas, korean, val_warnings=val_warnings)
 
     # 4. 관심종목 분석 추가 (등록된 종목 있을 경우)
     watchlist_data = load_watchlist()
