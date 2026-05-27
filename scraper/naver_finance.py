@@ -23,8 +23,25 @@ _KR_INDICES = {"코스피": "KOSPI", "코스닥": "KOSDAQ"}
 
 
 def fetch_korean_index() -> Dict:
-    """네이버 모바일 API로 코스피/코스닥 전일 마감 데이터 수집"""
-    result = {}
+    """네이버 모바일 API로 코스피/코스닥 데이터 수집.
+    장 시간(09:00~15:30 평일) 중에는 장중가, 그 외에는 전일 종가를 반환한다.
+    메타 키(_fetched_at, _is_intraday)는 이터레이션 시 isinstance 체크로 무시할 것.
+    """
+    now_kst = datetime.now(_KST)
+    fetched_at = now_kst.strftime("%Y/%m/%d %H:%M")
+
+    market_open  = now_kst.replace(hour=9,  minute=0,  second=0, microsecond=0)
+    market_close = now_kst.replace(hour=15, minute=30, second=0, microsecond=0)
+    is_intraday = (
+        now_kst.weekday() < 5 and          # 평일
+        market_open <= now_kst <= market_close
+    )
+
+    result: Dict = {
+        "_fetched_at": fetched_at,
+        "_is_intraday": is_intraday,
+    }
+
     for name, code in _KR_INDICES.items():
         try:
             url = _NAVER_INDEX_API.format(code=code)
@@ -32,14 +49,14 @@ def fetch_korean_index() -> Dict:
             resp.raise_for_status()
             data = resp.json()
 
-            close = float(data["closePrice"].replace(",", ""))
+            close      = float(data["closePrice"].replace(",", ""))
             change_pct = float(data["fluctuationsRatio"].replace(",", ""))
-            change = float(data["compareToPreviousClosePrice"].replace(",", ""))
+            change     = float(data["compareToPreviousClosePrice"].replace(",", ""))
 
             result[name] = {
-                "value": close,
+                "value":      close,
                 "change_pct": change_pct,
-                "signal": "▲" if change > 0 else "▼" if change < 0 else "━",
+                "signal":     "▲" if change > 0 else "▼" if change < 0 else "━",
             }
         except Exception as e:
             print(f"[네이버 지수] {name} 실패: {e}")

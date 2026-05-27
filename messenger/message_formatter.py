@@ -126,13 +126,18 @@ def format_morning_brief(
     if fx_parts:
         lines.append("  💱 " + " | ".join(fx_parts))
 
-    # 국내 지수
+    # 국내 지수 — 장중/전일종가 동적 라벨
     if korean_market:
+        # 메타 키(_로 시작) 제외하고 지수 데이터만 추출
         parts = [
             f"{n} {d['value']:,.2f}p {d['signal']}{d['change_pct']:+.2f}%"
-            for n, d in korean_market.items() if d
+            for n, d in korean_market.items()
+            if isinstance(d, dict) and "value" in d
         ]
-        lines.append(f"🇰🇷 국내지수 (전일 마감, 수집: {fetch_time})")
+        kr_fetch = korean_market.get("_fetched_at", fetch_time)
+        is_intraday = korean_market.get("_is_intraday", False)
+        kr_label = f"장중, {kr_fetch}" if is_intraday else f"전일 마감, 수집: {kr_fetch}"
+        lines.append(f"🇰🇷 국내지수 ({kr_label})")
         lines.append("  " + " | ".join(parts))
     # 강한/약한 섹터
     strong = analysis.get("strong_sectors", [])

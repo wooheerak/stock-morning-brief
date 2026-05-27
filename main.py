@@ -9,6 +9,28 @@ _KST = timezone(timedelta(hours=9))
 def _now_kst() -> datetime:
     return datetime.now(_KST).replace(tzinfo=None)
 
+
+def _filter_recent_news(news_list: list, max_hours: int = 36) -> list:
+    """최근 N시간 이내 뉴스만 유지. 시간 정보 없는 기사는 항상 포함."""
+    cutoff = _now_kst() - timedelta(hours=max_hours)
+    kept, dropped = [], 0
+    for n in news_list:
+        t = n.get("time", "")
+        if not t:
+            kept.append(n)
+            continue
+        try:
+            dt = datetime.strptime(t[:16], "%Y/%m/%d %H:%M")
+            if dt >= cutoff:
+                kept.append(n)
+            else:
+                dropped += 1
+        except ValueError:
+            kept.append(n)   # 파싱 실패 시 포함
+    if dropped:
+        print(f"  → 오래된 뉴스 {dropped}건 제외 (36시간 초과)")
+    return kept
+
 from scraper.naver_finance import fetch_market_news as naver_news, fetch_korean_index
 from scraper.hankyung import fetch_market_news as hankyung_news
 from scraper.yahoo_finance import fetch_overnight_summary
@@ -43,6 +65,8 @@ def run_morning_brief():
     print("뉴스 수집 중...")
     news = naver_news(12) + hankyung_news(8)
     print(f"  → 총 {len(news)}건 수집")
+    news = _filter_recent_news(news)
+    print(f"  → 필터 후 {len(news)}건")
 
     print("시장 데이터 수집 중...")
     overseas = fetch_overnight_summary()

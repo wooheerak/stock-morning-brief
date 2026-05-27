@@ -93,6 +93,8 @@ def validate_market_data(overseas: Dict, korean: Dict) -> Tuple[bool, List[str]]
         _flag(name, d)
 
     for name, d in korean.items():
+        if name.startswith("_"):   # _fetched_at, _is_intraday 등 메타 키 skip
+            continue
         _flag(name, d)
 
     return critical, warnings
