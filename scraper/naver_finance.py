@@ -1,10 +1,55 @@
 import requests
+import yfinance as yf
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
-from typing import List, Dict
+from typing import List, Dict, Optional
 import re
 
 _KST = timezone(timedelta(hours=9))
+
+# 교차 검증용 yfinance 티커 (^KS11은 TR지수라 절대값 비교 불가 — 변동률만 비교)
+_CROSS_TICKERS = {"코스피": "^KS11", "코스닥": "^KQ11"}
+_CROSS_TOLERANCE_PCT = 2.0   # 변동률 차이 허용 한도 (%)
+
+
+def _internal_check(name: str, close: float, change_abs: float, change_pct: float) -> Optional[str]:
+    """내부 일관성 검증: close - change_abs = prev_close → change_pct 재계산 비교.
+    change_abs는 부호가 있으므로 절댓값으로 비율 계산.
+    """
+    if close <= 0:
+        return None
+    prev_close = close - change_abs
+    if prev_close <= 0:
+        return None
+    # 부호 포함 변동률 재계산 (change_abs는 음수일 수 있음)
+    calc_pct = change_abs / prev_close * 100
+    diff = abs(calc_pct - change_pct)   # 둘 다 부호 있는 값으로 비교
+    if diff > 0.5:
+        return (f"🚨 {name} 내부 검증 불일치: "
+                f"계산 변동률 {calc_pct:+.2f}% ↔ API 제공 {change_pct:+.2f}% "
+                f"(차이 {diff:.2f}%) — 파싱 오류 의심")
+    return None
+
+
+def _cross_check(name: str, naver_pct: float) -> Optional[str]:
+    """yfinance 교차 검증: 변동률 차이가 허용 한도 초과 시 경고."""
+    ticker = _CROSS_TICKERS.get(name)
+    if not ticker:
+        return None
+    try:
+        hist = yf.Ticker(ticker).history(period="2d")
+        if len(hist) < 2:
+            return None
+        yf_pct = (float(hist["Close"].iloc[-1]) - float(hist["Close"].iloc[-2])) \
+                 / float(hist["Close"].iloc[-2]) * 100
+        diff = abs(naver_pct - yf_pct)
+        if diff > _CROSS_TOLERANCE_PCT:
+            return (f"🚨 {name} 교차 검증 불일치: "
+                    f"네이버 {naver_pct:+.2f}% ↔ yfinance {yf_pct:+.2f}% "
+                    f"(차이 {diff:.2f}%) — 수치 원본 확인 권고")
+    except Exception:
+        pass
+    return None
 
 HEADERS = {
     "User-Agent": (
@@ -37,9 +82,12 @@ def fetch_korean_index() -> Dict:
         market_open <= now_kst <= market_close
     )
 
+    val_warnings: List[str] = []
+
     result: Dict = {
-        "_fetched_at": fetched_at,
+        "_fetched_at":  fetched_at,
         "_is_intraday": is_intraday,
+        "_warnings":    val_warnings,   # 검증 경고 (main.py에서 출력)
     }
 
     for name, code in _KR_INDICES.items():
@@ -58,8 +106,21 @@ def fetch_korean_index() -> Dict:
                 "change_pct": change_pct,
                 "signal":     "▲" if change > 0 else "▼" if change < 0 else "━",
             }
+
+            # ── 이중 검증 ──────────────────────────────────────
+            # 1) 내부 일관성: API 제공 값끼리 수학적 일치 여부
+            w1 = _internal_check(name, close, change, change_pct)
+            if w1:
+                val_warnings.append(w1)
+
+            # 2) 교차 검증: yfinance 변동률과 비교
+            w2 = _cross_check(name, change_pct)
+            if w2:
+                val_warnings.append(w2)
+
         except Exception as e:
             print(f"[네이버 지수] {name} 실패: {e}")
+
     return result
 
 

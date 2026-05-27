@@ -11,4 +11,4 @@ build/
 venv/
 *.log
 data/watchlist.json
-data/performance_log.json
+# performance_log.json은 GitHub Actions가 자동 커밋 (gitignore 제외)

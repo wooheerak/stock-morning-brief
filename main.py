@@ -72,6 +72,10 @@ def run_morning_brief():
     overseas = fetch_overnight_summary()
     korean = fetch_korean_index()
 
+    # 국내 지수 이중 검증 결과 출력 (내부 일관성 + yfinance 교차)
+    for w in korean.get("_warnings", []):
+        print(f"  {w}")
+
     # 데이터 검증 (범위 이탈 / 파싱 오류 / 수집 실패 통합 체크)
     print("데이터 검증 중...")
     critical_error, warnings = validate_market_data(overseas, korean)
