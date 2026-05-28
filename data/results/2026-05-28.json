@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-05-28",
+    "code": "005380",
+    "name": "현대차",
+    "entry_price": 709000.0,
+    "exit_price": 694820.0,
+    "return_rate": -2.0,
+    "result": "LOSS",
+    "exit_reason": "STOP_LOSS",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "WATCH",
+    "confidence": 65,
+    "open_price": 709000.0,
+    "high_price": 714000.0,
+    "low_price": 651000.0,
+    "close_price": 677000.0
+  }
+]
