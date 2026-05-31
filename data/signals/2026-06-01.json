@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-01",
+  "time": "08:36",
+  "market_sentiment_score": 47,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "제약/바이오",
+    "AI/로봇",
+    "반도체"
+  ],
+  "avoid_sectors": [
+    "2차전지",
+    "환율민감주"
+  ],
+  "candidates": [
+    {
+      "code": "086520",
+      "name": "에코프로",
+      "action": "SKIP",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": false,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 30
+    }
+  ]
+}

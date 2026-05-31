@@ -8,8 +8,8 @@
     "reason": "데이터센터용 엔진 재평가 기대감 및 전일 강한 수급 유입.",
     "entry_close": 744000.0,
     "perf_1d": -14.52,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -5.38,
+    "perf_5d": -8.6
   },
   {
     "date": "2026-05-27",
@@ -20,8 +20,8 @@
     "reason": "내년 영업익 500조 가능성 및 주가 저평가 분석. AI 반도체 성장 모멘텀.",
     "entry_close": 307000.0,
     "perf_1d": -10.1,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -2.44,
+    "perf_5d": -4.72
   },
   {
     "date": "2026-05-27",
@@ -32,8 +32,8 @@
     "reason": "AI 반도체 성장 기대 및 목표가 상향 뉴스에 힘입은 강한 상승 모멘텀",
     "entry_close": 307000.0,
     "perf_1d": -10.1,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -2.44,
+    "perf_5d": -4.72
   },
   {
     "date": "2026-05-27",
@@ -44,8 +44,8 @@
     "reason": "AI 반도체 핵심 경쟁력 부각 및 업황 개선 기대감으로 강한 상승 지속",
     "entry_close": 2242625.0,
     "perf_1d": -22.2,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 2.07,
+    "perf_5d": -13.46
   },
   {
     "date": "2026-05-27",
@@ -56,8 +56,8 @@
     "reason": "AI 반도체 수요 및 마이크론 호재 영향으로 강한 모멘텀.",
     "entry_close": 2242625.0,
     "perf_1d": -22.2,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 2.07,
+    "perf_5d": -13.46
   },
   {
     "date": "2026-05-27",
@@ -68,8 +68,8 @@
     "reason": "반도체 업황 개선 기대 및 긍정적 실적 전망으로 상승세.",
     "entry_close": 307000.0,
     "perf_1d": -10.1,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -2.44,
+    "perf_5d": -4.72
   },
   {
     "date": "2026-05-27",
@@ -80,8 +80,8 @@
     "reason": "필라델피아반도체 강세 및 AI 반도체 수요 기대 지속.",
     "entry_close": 2242625.0,
     "perf_1d": -22.2,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 2.07,
+    "perf_5d": -13.46
   },
   {
     "date": "2026-05-27",
@@ -92,8 +92,8 @@
     "reason": "AI 반도체 수혜 및 시장의 저평가 해소 기대감.",
     "entry_close": 307000.0,
     "perf_1d": -10.1,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -2.44,
+    "perf_5d": -4.72
   },
   {
     "date": "2026-05-27",
@@ -104,8 +104,8 @@
     "reason": "글로벌 반도체 업황 강세, HBM 수요 기대, 시장 주도주로서의 수급 집중.",
     "entry_close": 2242625.0,
     "perf_1d": -22.2,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 2.07,
+    "perf_5d": -13.46
   },
   {
     "date": "2026-05-27",
@@ -116,8 +116,8 @@
     "reason": "필라델피아반도체 급등 및 AI 반도체 모멘텀 지속",
     "entry_close": 2242625.0,
     "perf_1d": -22.2,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 2.07,
+    "perf_5d": -13.46
   },
   {
     "date": "2026-05-28",
@@ -128,7 +128,7 @@
     "reason": "피지컬 AI 수혜 기대감 및 목표가 상향. 차트 강세 유지.",
     "entry_close": 677000.0,
     "perf_1d": -1.99,
-    "perf_3d": null,
+    "perf_3d": 6.79,
     "perf_5d": null
   },
   {
@@ -140,7 +140,7 @@
     "reason": "자회사 목표가 상향, 안정적 발전설비 정비 수주 기반 보유.",
     "entry_close": 51300.0,
     "perf_1d": 5.46,
-    "perf_3d": null,
+    "perf_3d": -0.58,
     "perf_5d": null
   },
   {
@@ -150,9 +150,9 @@
     "code": "035420",
     "signal": "눌림목대기",
     "reason": "전일 거래량 동반 반등, 단기 반발 매수세 유입",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 198800.0,
+    "perf_1d": 3.12,
+    "perf_3d": 2.11,
     "perf_5d": null
   },
   {
@@ -162,9 +162,9 @@
     "code": "005380",
     "signal": "추격가능",
     "reason": "견조한 주가 흐름, 그룹사 신사업 모멘텀 기대",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 678500.0,
+    "perf_1d": -0.22,
+    "perf_3d": -3.82,
     "perf_5d": null
   },
   {
@@ -174,6 +174,18 @@
     "code": "035720",
     "category": "가치",
     "reason": "52주 신저가 수준, 장기적인 밸류에이션 매력 부각 가능성",
+    "entry_close": 40500.0,
+    "perf_1d": -0.99,
+    "perf_3d": 3.33,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-01",
+    "type": "short",
+    "name": "에코프로",
+    "code": "086520",
+    "signal": "관망",
+    "reason": "기술적 약세 전환, 단기 추세 하락 지속",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,

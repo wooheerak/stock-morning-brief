@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-05-29",
+    "code": "005380",
+    "name": "현대차",
+    "entry_price": 704000.0,
+    "exit_price": 725120.0,
+    "return_rate": 3.0,
+    "result": "WIN",
+    "exit_reason": "TAKE_PROFIT",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "BUY",
+    "confidence": 80,
+    "open_price": 704000.0,
+    "high_price": 739000.0,
+    "low_price": 701000.0,
+    "close_price": 723000.0
+  },
+  {
+    "date": "2026-05-29",
+    "code": "035420",
+    "name": "네이버",
+    "entry_price": 211500.0,
+    "exit_price": 217845.0,
+    "return_rate": 3.0,
+    "result": "WIN",
+    "exit_reason": "TAKE_PROFIT",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "WATCH",
+    "confidence": 70,
+    "open_price": 211500.0,
+    "high_price": 247500.0,
+    "low_price": 211000.0,
+    "close_price": 234000.0
+  }
+]
