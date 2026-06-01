@@ -129,7 +129,7 @@
     "entry_close": 677000.0,
     "perf_1d": -1.99,
     "perf_3d": 6.79,
-    "perf_5d": null
+    "perf_5d": 1.4
   },
   {
     "date": "2026-05-28",
@@ -141,7 +141,7 @@
     "entry_close": 51300.0,
     "perf_1d": 5.46,
     "perf_3d": -0.58,
-    "perf_5d": null
+    "perf_5d": 5.26
   },
   {
     "date": "2026-05-29",
@@ -186,6 +186,18 @@
     "code": "086520",
     "signal": "관망",
     "reason": "기술적 약세 전환, 단기 추세 하락 지속",
+    "entry_close": 130400.0,
+    "perf_1d": 12.73,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-02",
+    "type": "mid",
+    "name": "현대차",
+    "code": "005380",
+    "category": "구조적성장",
+    "reason": "보스턴다이내믹스 협업 구체화, 목표가 상향 등 중장기 성장 동력 확보.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
