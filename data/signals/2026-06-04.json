@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-04",
+  "time": "09:12",
+  "market_sentiment_score": 16,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "반도체장비",
+    "전력반도체"
+  ],
+  "avoid_sectors": [
+    "대형기술주",
+    "플랫폼",
+    "카지노"
+  ],
+  "candidates": []
+}
