@@ -200,6 +200,18 @@
     "reason": "보스턴다이내믹스 협업 구체화, 목표가 상향 등 중장기 성장 동력 확보.",
     "entry_close": 729000.0,
     "perf_1d": -6.93,
+    "perf_3d": -7.13,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-05",
+    "type": "short",
+    "name": "LG화학",
+    "code": "051910",
+    "signal": "눌림목대기",
+    "reason": "배터리·화학 회복세로 2분기 깜짝 실적 기대감 부각",
+    "entry_close": null,
+    "perf_1d": null,
     "perf_3d": null,
     "perf_5d": null
   }
