@@ -189,7 +189,7 @@
     "entry_close": 130400.0,
     "perf_1d": 12.73,
     "perf_3d": 10.97,
-    "perf_5d": null
+    "perf_5d": -1.23
   },
   {
     "date": "2026-06-02",
@@ -201,7 +201,7 @@
     "entry_close": 729000.0,
     "perf_1d": -6.93,
     "perf_3d": -7.13,
-    "perf_5d": null
+    "perf_5d": -3.98
   },
   {
     "date": "2026-06-05",
@@ -210,6 +210,42 @@
     "code": "051910",
     "signal": "눌림목대기",
     "reason": "배터리·화학 회복세로 2분기 깜짝 실적 기대감 부각",
+    "entry_close": 355000.0,
+    "perf_1d": -0.85,
+    "perf_3d": 3.38,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-08",
+    "type": "mid",
+    "name": "DB손해보험",
+    "code": "005830",
+    "category": "가치",
+    "reason": "고배당 매력과 새로운 밸류업 정책 기대감으로 중기적 관심 유효.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-08",
+    "type": "mid",
+    "name": "KT&G",
+    "code": "033780",
+    "category": "가치",
+    "reason": "안정적 실적 기반의 배당 매력 및 성장주로의 진화 가능성에 주목.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-08",
+    "type": "mid",
+    "name": "한미약품",
+    "code": "128940",
+    "category": "구조적성장",
+    "reason": "'릴리' 계약 이후 추가 기술 수출 가능성 및 신약 개발 모멘텀 보유.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
