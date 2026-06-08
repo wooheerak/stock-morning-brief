@@ -222,8 +222,8 @@
     "code": "005830",
     "category": "가치",
     "reason": "고배당 매력과 새로운 밸류업 정책 기대감으로 중기적 관심 유효.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 136200.0,
+    "perf_1d": 3.52,
     "perf_3d": null,
     "perf_5d": null
   },
@@ -234,8 +234,8 @@
     "code": "033780",
     "category": "가치",
     "reason": "안정적 실적 기반의 배당 매력 및 성장주로의 진화 가능성에 주목.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 177200.0,
+    "perf_1d": 4.46,
     "perf_3d": null,
     "perf_5d": null
   },
@@ -246,8 +246,8 @@
     "code": "128940",
     "category": "구조적성장",
     "reason": "'릴리' 계약 이후 추가 기술 수출 가능성 및 신약 개발 모멘텀 보유.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 413000.0,
+    "perf_1d": 30.51,
     "perf_3d": null,
     "perf_5d": null
   }
