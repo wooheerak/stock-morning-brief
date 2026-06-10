@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-11",
+  "time": "08:54",
+  "market_sentiment_score": 25,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "전력기기",
+    "방산",
+    "건설"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "플랫폼",
+    "기술성장"
+  ],
+  "candidates": [
+    {
+      "code": "010120",
+      "name": "LS일렉트릭",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 60
+    }
+  ]
+}
