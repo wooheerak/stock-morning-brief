@@ -258,6 +258,18 @@
     "code": "010120",
     "signal": "눌림목대기",
     "reason": "전력기기 업황 호조 및 증권사 수주 가이던스 상향.",
+    "entry_close": 229500.0,
+    "perf_1d": -1.09,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-12",
+    "type": "short",
+    "name": "KB금융",
+    "code": "105560",
+    "signal": "눌림목대기",
+    "reason": "2분기 역대 최대 순익 전망 및 증권사 목표가 상향.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,

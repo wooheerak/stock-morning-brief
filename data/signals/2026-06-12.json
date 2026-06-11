@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-12",
+  "time": "08:59",
+  "market_sentiment_score": 89,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "반도체",
+    "우주항공",
+    "금융"
+  ],
+  "avoid_sectors": [],
+  "candidates": [
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 65
+    }
+  ]
+}
