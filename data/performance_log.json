@@ -225,7 +225,7 @@
     "entry_close": 136200.0,
     "perf_1d": 3.52,
     "perf_3d": 6.24,
-    "perf_5d": null
+    "perf_5d": 2.79
   },
   {
     "date": "2026-06-08",
@@ -237,7 +237,7 @@
     "entry_close": 177200.0,
     "perf_1d": 4.46,
     "perf_3d": -0.79,
-    "perf_5d": null
+    "perf_5d": 4.46
   },
   {
     "date": "2026-06-08",
@@ -249,7 +249,7 @@
     "entry_close": 413000.0,
     "perf_1d": 30.51,
     "perf_3d": 19.01,
-    "perf_5d": null
+    "perf_5d": -0.48
   },
   {
     "date": "2026-06-11",
@@ -260,7 +260,7 @@
     "reason": "전력기기 업황 호조 및 증권사 수주 가이던스 상향.",
     "entry_close": 229500.0,
     "perf_1d": -1.09,
-    "perf_3d": null,
+    "perf_3d": -3.05,
     "perf_5d": null
   },
   {
@@ -270,6 +270,18 @@
     "code": "105560",
     "signal": "눌림목대기",
     "reason": "2분기 역대 최대 순익 전망 및 증권사 목표가 상향.",
+    "entry_close": 154000.0,
+    "perf_1d": -1.62,
+    "perf_3d": -1.62,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-15",
+    "type": "mid",
+    "name": "현대차",
+    "code": "005380",
+    "category": "구조적성장",
+    "reason": "기업가치 재평가 및 '황제주' 등극 가능성 부각, 중장기 성장 동력 확보.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,

@@ -1,0 +1,16 @@
+{
+  "date": "2026-06-15",
+  "time": "08:44",
+  "market_sentiment_score": 68,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "AI반도체",
+    "자동차"
+  ],
+  "avoid_sectors": [
+    "에너지",
+    "방산"
+  ],
+  "candidates": []
+}
