@@ -261,7 +261,7 @@
     "entry_close": 229500.0,
     "perf_1d": -1.09,
     "perf_3d": -3.05,
-    "perf_5d": null
+    "perf_5d": 2.83
   },
   {
     "date": "2026-06-12",
@@ -282,6 +282,30 @@
     "code": "005380",
     "category": "구조적성장",
     "reason": "기업가치 재평가 및 '황제주' 등극 가능성 부각, 중장기 성장 동력 확보.",
+    "entry_close": 647000.0,
+    "perf_1d": -6.96,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-16",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "추격가능",
+    "reason": "美 반도체 섹터 급등 및 AI 메모리 수요 기대.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-16",
+    "type": "short",
+    "name": "현대모비스",
+    "code": "012330",
+    "signal": "눌림목대기",
+    "reason": "로봇 핵심부품 공급 확대 기대감 부각.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
