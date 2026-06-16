@@ -273,7 +273,7 @@
     "entry_close": 154000.0,
     "perf_1d": -1.62,
     "perf_3d": -1.62,
-    "perf_5d": null
+    "perf_5d": 0.0
   },
   {
     "date": "2026-06-15",
@@ -294,8 +294,8 @@
     "code": "000660",
     "signal": "추격가능",
     "reason": "美 반도체 섹터 급등 및 AI 메모리 수요 기대.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 2382000.0,
+    "perf_1d": -14.02,
     "perf_3d": null,
     "perf_5d": null
   },
@@ -306,6 +306,18 @@
     "code": "012330",
     "signal": "눌림목대기",
     "reason": "로봇 핵심부품 공급 확대 기대감 부각.",
+    "entry_close": 660000.0,
+    "perf_1d": -13.64,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-17",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "눌림목대기",
+    "reason": "견조한 실적 전망 및 전일 미 반도체 약세 속 상대적 강세.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
