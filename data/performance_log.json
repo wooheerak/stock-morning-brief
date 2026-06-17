@@ -284,7 +284,7 @@
     "reason": "기업가치 재평가 및 '황제주' 등극 가능성 부각, 중장기 성장 동력 확보.",
     "entry_close": 647000.0,
     "perf_1d": -6.96,
-    "perf_3d": null,
+    "perf_3d": -7.73,
     "perf_5d": null
   },
   {
@@ -318,6 +318,54 @@
     "code": "005930",
     "signal": "눌림목대기",
     "reason": "견조한 실적 전망 및 전일 미 반도체 약세 속 상대적 강세.",
+    "entry_close": 346500.0,
+    "perf_1d": -13.71,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-18",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "높은 목표가 언급 및 구조적 성장 기대감 지속",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-18",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "눌림목대기",
+    "reason": "2분기 실적 기대감 및 목표가 상향 뉴스",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-18",
+    "type": "mid",
+    "name": "대덕전자",
+    "code": "353200",
+    "category": "구조적성장",
+    "reason": "올해 최대 실적 전망 및 견고한 업황 지속 기대",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-18",
+    "type": "mid",
+    "name": "기아",
+    "code": "000270",
+    "category": "가치",
+    "reason": "견조한 실적 기반의 밸류에이션 매력 및 신차 모멘텀",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
