@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-23",
+  "time": "08:48",
+  "market_sentiment_score": 47,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "조선",
+    "항공"
+  ],
+  "avoid_sectors": [
+    "빅테크",
+    "IT플랫폼"
+  ],
+  "candidates": [
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 75
+    }
+  ]
+}
