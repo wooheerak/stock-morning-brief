@@ -392,7 +392,7 @@
     "reason": "미국 SOX 강세 및 프리마켓 300만원 터치, 수급 개선 기대",
     "entry_close": 2555000.0,
     "perf_1d": -1.33,
-    "perf_3d": null,
+    "perf_3d": 8.18,
     "perf_5d": null
   },
   {
@@ -426,8 +426,8 @@
     "code": "005930",
     "signal": "눌림목대기",
     "reason": "미국 ADR 상장 기대감 및 견조한 실적 전망 지속.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 358500.0,
+    "perf_1d": -1.26,
     "perf_3d": null,
     "perf_5d": null
   },
@@ -438,6 +438,18 @@
     "code": "000660",
     "signal": "눌림목대기",
     "reason": "미국 나스닥 ADR 상장 기대 및 AI 반도체 수요 지속.",
+    "entry_close": 2917000.0,
+    "perf_1d": -5.25,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-26",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "HBM 성장 기대 및 메모리 사이클 호조, 실적 전망 상향",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,

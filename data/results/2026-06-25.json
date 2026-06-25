@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-06-25",
+    "code": "005930",
+    "name": "삼성전자",
+    "entry_price": 359500.0,
+    "exit_price": 352310.0,
+    "return_rate": -2.0,
+    "result": "LOSS",
+    "exit_reason": "STOP_LOSS",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "WATCH",
+    "confidence": 75,
+    "open_price": 359500.0,
+    "high_price": 362500.0,
+    "low_price": 352000.0,
+    "close_price": 358500.0
+  },
+  {
+    "date": "2026-06-25",
+    "code": "000660",
+    "name": "SK하이닉스",
+    "entry_price": 2865000.0,
+    "exit_price": 2807700.0,
+    "return_rate": -2.0,
+    "result": "LOSS",
+    "exit_reason": "STOP_LOSS",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "WATCH",
+    "confidence": 70,
+    "open_price": 2865000.0,
+    "high_price": 2987000.0,
+    "low_price": 2749000.0,
+    "close_price": 2917000.0
+  }
+]
