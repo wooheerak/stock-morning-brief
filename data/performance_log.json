@@ -429,7 +429,7 @@
     "entry_close": 358500.0,
     "perf_1d": -1.26,
     "perf_3d": -5.3,
-    "perf_5d": null
+    "perf_5d": -13.53
   },
   {
     "date": "2026-06-25",
@@ -441,7 +441,7 @@
     "entry_close": 2917000.0,
     "perf_1d": -5.25,
     "perf_3d": -8.36,
-    "perf_5d": null
+    "perf_5d": -12.41
   },
   {
     "date": "2026-06-26",
@@ -462,6 +462,18 @@
     "code": "005930",
     "category": "구조적성장",
     "reason": "전일 하락에도 '삼전닉스 1만피' 등 장기 성장론 부각, 반도체 업황 회복 기대감 유효",
+    "entry_close": 323000.0,
+    "perf_1d": -4.02,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-06-30",
+    "type": "short",
+    "name": "현대차",
+    "code": "005380",
+    "signal": "눌림목대기",
+    "reason": "2분기 실적 우려 속 하반기 턴어라운드 기대감 상존",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
