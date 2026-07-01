@@ -453,7 +453,7 @@
     "entry_close": 2621000.0,
     "perf_1d": 11.29,
     "perf_3d": 11.37,
-    "perf_5d": null
+    "perf_5d": -2.33
   },
   {
     "date": "2026-06-29",
@@ -464,7 +464,7 @@
     "reason": "전일 하락에도 '삼전닉스 1만피' 등 장기 성장론 부각, 반도체 업황 회복 기대감 유효",
     "entry_close": 323000.0,
     "perf_1d": -4.02,
-    "perf_3d": null,
+    "perf_3d": 10.99,
     "perf_5d": null
   },
   {
@@ -474,6 +474,30 @@
     "code": "005380",
     "signal": "눌림목대기",
     "reason": "2분기 실적 우려 속 하반기 턴어라운드 기대감 상존",
+    "entry_close": 495000.0,
+    "perf_1d": -1.52,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-02",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "긍정적 실적 전망 및 기관 매수 흐름에 따른 저가 매수 기회",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-02",
+    "type": "mid",
+    "name": "삼성바이오로직스",
+    "code": "207940",
+    "category": "수주기반",
+    "reason": "견조한 CMO 수주 모멘텀과 중장기적인 기업 성장 가능성 부각",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,

@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-02",
+  "time": "08:50",
+  "market_sentiment_score": 28,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "메모리반도체",
+    "바이오",
+    "IT부품"
+  ],
+  "avoid_sectors": [
+    "비메모리반도체",
+    "엔터"
+  ],
+  "candidates": [
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 60
+    }
+  ]
+}
