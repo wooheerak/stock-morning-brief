@@ -1,0 +1,18 @@
+{
+  "date": "2026-07-06",
+  "time": "08:34",
+  "market_sentiment_score": 31,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "원자재",
+    "방어주",
+    "유통"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "2차전지",
+    "성장주"
+  ],
+  "candidates": []
+}

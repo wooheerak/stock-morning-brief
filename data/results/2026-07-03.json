@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-07-03",
+    "code": "068270",
+    "name": "셀트리온",
+    "entry_price": 183700.0,
+    "exit_price": 180026.0,
+    "return_rate": -2.0,
+    "result": "LOSS",
+    "exit_reason": "STOP_LOSS",
+    "take_profit_pct": 3.0,
+    "stop_loss_pct": -2.0,
+    "action": "WATCH",
+    "confidence": 65,
+    "open_price": 183700.0,
+    "high_price": 188000.0,
+    "low_price": 178600.0,
+    "close_price": 183600.0
+  }
+]

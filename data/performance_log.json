@@ -465,7 +465,7 @@
     "entry_close": 323000.0,
     "perf_1d": -4.02,
     "perf_3d": 10.99,
-    "perf_5d": null
+    "perf_5d": -11.46
   },
   {
     "date": "2026-06-30",
@@ -477,7 +477,7 @@
     "entry_close": 495000.0,
     "perf_1d": -1.52,
     "perf_3d": -2.93,
-    "perf_5d": null
+    "perf_5d": -0.61
   },
   {
     "date": "2026-07-02",
@@ -488,7 +488,7 @@
     "reason": "긍정적 실적 전망 및 기관 매수 흐름에 따른 저가 매수 기회",
     "entry_close": 2187000.0,
     "perf_1d": 22.22,
-    "perf_3d": null,
+    "perf_3d": 10.88,
     "perf_5d": null
   },
   {
@@ -500,7 +500,7 @@
     "reason": "견조한 CMO 수주 모멘텀과 중장기적인 기업 성장 가능성 부각",
     "entry_close": 1406000.0,
     "perf_1d": -4.48,
-    "perf_3d": null,
+    "perf_3d": 1.07,
     "perf_5d": null
   },
   {
@@ -510,9 +510,9 @@
     "code": "068270",
     "signal": "눌림목대기",
     "reason": "2분기 영업익 77% 증가 발표 및 차트 강세 유지",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 174500.0,
+    "perf_1d": 1.2,
+    "perf_3d": 2.69,
     "perf_5d": null
   },
   {
@@ -522,9 +522,9 @@
     "code": "066570",
     "signal": "눌림목대기",
     "reason": "2분기 호실적 및 신사업 기대감, 목표가 상향",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 193300.0,
+    "perf_1d": -0.52,
+    "perf_3d": 1.76,
     "perf_5d": null
   },
   {
@@ -534,9 +534,9 @@
     "code": "000660",
     "category": "구조적성장",
     "reason": "AI 반도체(HBM) 장기 성장성에 기반한 낙폭 과대 매력 부각",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 2560000.0,
+    "perf_1d": -14.57,
+    "perf_3d": 2.66,
     "perf_5d": null
   }
 ]
