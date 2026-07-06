@@ -489,7 +489,7 @@
     "entry_close": 2187000.0,
     "perf_1d": 22.22,
     "perf_3d": 10.88,
-    "perf_5d": null
+    "perf_5d": 21.17
   },
   {
     "date": "2026-07-02",
@@ -501,7 +501,7 @@
     "entry_close": 1406000.0,
     "perf_1d": -4.48,
     "perf_3d": 1.07,
-    "perf_5d": null
+    "perf_5d": -1.07
   },
   {
     "date": "2026-07-03",
@@ -537,6 +537,18 @@
     "entry_close": 2560000.0,
     "perf_1d": -14.57,
     "perf_3d": 2.66,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-07",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "눌림목대기",
+    "reason": "AI 메모리 등 실적 기대감 및 반도체 업황 강세",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
     "perf_5d": null
   }
 ]
