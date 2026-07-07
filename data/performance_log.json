@@ -513,7 +513,7 @@
     "entry_close": 174500.0,
     "perf_1d": 1.2,
     "perf_3d": 2.69,
-    "perf_5d": null
+    "perf_5d": 0.0
   },
   {
     "date": "2026-07-03",
@@ -525,7 +525,7 @@
     "entry_close": 193300.0,
     "perf_1d": -0.52,
     "perf_3d": 1.76,
-    "perf_5d": null
+    "perf_5d": 0.0
   },
   {
     "date": "2026-07-03",
@@ -537,7 +537,7 @@
     "entry_close": 2560000.0,
     "perf_1d": -14.57,
     "perf_3d": 2.66,
-    "perf_5d": null
+    "perf_5d": 0.0
   },
   {
     "date": "2026-07-07",
@@ -546,6 +546,30 @@
     "code": "005930",
     "signal": "눌림목대기",
     "reason": "AI 메모리 등 실적 기대감 및 반도체 업황 강세",
+    "entry_close": 296000.0,
+    "perf_1d": 6.25,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-08",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "눌림목대기",
+    "reason": "전일 급락 및 52주 최저점 수준 근접으로 낙폭 과대 인식",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-08",
+    "type": "mid",
+    "name": "현대차",
+    "code": "005380",
+    "category": "가치",
+    "reason": "2분기 실적 우려 선반영 및 52주 신저가 수준 도달로 중장기 가치 부각",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
