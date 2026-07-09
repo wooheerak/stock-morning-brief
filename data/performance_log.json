@@ -548,7 +548,7 @@
     "reason": "AI 메모리 등 실적 기대감 및 반도체 업황 강세",
     "entry_close": 296000.0,
     "perf_1d": 6.25,
-    "perf_3d": null,
+    "perf_3d": 4.56,
     "perf_5d": null
   },
   {
@@ -582,8 +582,8 @@
     "code": "000660",
     "signal": "눌림목대기",
     "reason": "ADR 상장 기대 및 AI 반도체 대장주로서 중장기 성장성",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 2186000.0,
+    "perf_1d": 10.93,
     "perf_3d": null,
     "perf_5d": null
   }

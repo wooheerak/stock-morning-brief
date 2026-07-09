@@ -1,0 +1,13 @@
+{
+  "date": "2026-07-10",
+  "time": "08:43",
+  "market_sentiment_score": 73,
+  "strategy": "적극매수",
+  "cash_ratio": "30~40%",
+  "watch_sectors": [
+    "반도체",
+    "IT하드웨어"
+  ],
+  "avoid_sectors": [],
+  "candidates": []
+}
