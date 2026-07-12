@@ -549,7 +549,7 @@
     "entry_close": 296000.0,
     "perf_1d": 6.25,
     "perf_3d": 4.56,
-    "perf_5d": null
+    "perf_5d": -3.72
   },
   {
     "date": "2026-07-08",
@@ -560,8 +560,8 @@
     "reason": "전일 급락 및 52주 최저점 수준 근접으로 낙폭 과대 인식",
     "entry_close": 277500.0,
     "perf_1d": 3.06,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 0.18,
+    "perf_5d": 14.59
   },
   {
     "date": "2026-07-08",
@@ -572,8 +572,8 @@
     "reason": "2분기 실적 우려 선반영 및 52주 신저가 수준 도달로 중장기 가치 부각",
     "entry_close": 462500.0,
     "perf_1d": 4.22,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -3.68,
+    "perf_5d": 8.54
   },
   {
     "date": "2026-07-09",
@@ -584,6 +584,18 @@
     "reason": "ADR 상장 기대 및 AI 반도체 대장주로서 중장기 성장성",
     "entry_close": 2186000.0,
     "perf_1d": 10.93,
+    "perf_3d": -0.27,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-13",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "관망",
+    "reason": "외화조달 뉴스 긍정적이나, MA20 아래 약세 구간",
+    "entry_close": null,
+    "perf_1d": null,
     "perf_3d": null,
     "perf_5d": null
   }
