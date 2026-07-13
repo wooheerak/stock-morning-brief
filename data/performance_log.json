@@ -585,7 +585,7 @@
     "entry_close": 2186000.0,
     "perf_1d": 10.93,
     "perf_3d": -0.27,
-    "perf_5d": null
+    "perf_5d": 0.69
   },
   {
     "date": "2026-07-13",
@@ -594,8 +594,8 @@
     "code": "000660",
     "signal": "관망",
     "reason": "외화조달 뉴스 긍정적이나, MA20 아래 약세 구간",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 1845000.0,
+    "perf_1d": 19.3,
     "perf_3d": null,
     "perf_5d": null
   }
