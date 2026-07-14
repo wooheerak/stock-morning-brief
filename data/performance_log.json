@@ -598,5 +598,17 @@
     "perf_1d": 19.3,
     "perf_3d": null,
     "perf_5d": null
+  },
+  {
+    "date": "2026-07-15",
+    "type": "short",
+    "name": "현대차",
+    "code": "005380",
+    "signal": "관망",
+    "reason": "전일 급락 및 52주 신저가 경신, 이동평균선 역배열 지속",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]
