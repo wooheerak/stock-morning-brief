@@ -1,0 +1,17 @@
+{
+  "date": "2026-07-16",
+  "time": "08:26",
+  "market_sentiment_score": 69,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "IT 플랫폼",
+    "에너지",
+    "2차전지"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "일부 대형주"
+  ],
+  "candidates": []
+}

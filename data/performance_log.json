@@ -596,7 +596,7 @@
     "reason": "외화조달 뉴스 긍정적이나, MA20 아래 약세 구간",
     "entry_close": 1845000.0,
     "perf_1d": 19.3,
-    "perf_3d": null,
+    "perf_3d": 18.48,
     "perf_5d": null
   },
   {
@@ -606,8 +606,8 @@
     "code": "005380",
     "signal": "관망",
     "reason": "전일 급락 및 52주 신저가 경신, 이동평균선 역배열 지속",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 434000.0,
+    "perf_1d": 2.65,
     "perf_3d": null,
     "perf_5d": null
   }
