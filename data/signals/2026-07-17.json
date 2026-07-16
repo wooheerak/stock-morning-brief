@@ -1,0 +1,14 @@
+{
+  "date": "2026-07-17",
+  "time": "08:23",
+  "market_sentiment_score": 26,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [],
+  "avoid_sectors": [
+    "반도체",
+    "기술주",
+    "바이오"
+  ],
+  "candidates": []
+}
