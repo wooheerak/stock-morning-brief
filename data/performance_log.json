@@ -597,7 +597,7 @@
     "entry_close": 1845000.0,
     "perf_1d": 19.3,
     "perf_3d": 18.48,
-    "perf_5d": null
+    "perf_5d": 12.85
   },
   {
     "date": "2026-07-15",
@@ -608,7 +608,7 @@
     "reason": "전일 급락 및 52주 신저가 경신, 이동평균선 역배열 지속",
     "entry_close": 434000.0,
     "perf_1d": 2.65,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 0.0,
+    "perf_5d": -8.06
   }
 ]
