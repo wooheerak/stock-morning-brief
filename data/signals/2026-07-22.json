@@ -1,0 +1,14 @@
+{
+  "date": "2026-07-22",
+  "time": "08:26",
+  "market_sentiment_score": 59,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "정유/에너지",
+    "원전"
+  ],
+  "avoid_sectors": [],
+  "candidates": []
+}
