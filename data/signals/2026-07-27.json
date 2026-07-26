@@ -1,0 +1,18 @@
+{
+  "date": "2026-07-27",
+  "time": "08:27",
+  "market_sentiment_score": 52,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "항공",
+    "해운",
+    "유통"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "정유",
+    "2차전지"
+  ],
+  "candidates": []
+}
