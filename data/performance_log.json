@@ -610,5 +610,17 @@
     "perf_1d": 2.65,
     "perf_3d": 0.0,
     "perf_5d": -8.06
+  },
+  {
+    "date": "2026-07-28",
+    "type": "short",
+    "name": "네이버",
+    "code": "035420",
+    "signal": "추격가능",
+    "reason": "AI 투자 및 두나무 합병 기대감, 전일 거래량 급증",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]

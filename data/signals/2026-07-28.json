@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-28",
+  "time": "08:32",
+  "market_sentiment_score": 46,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "AI/플랫폼",
+    "조선"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "에너지",
+    "유통"
+  ],
+  "candidates": [
+    {
+      "code": "035420",
+      "name": "네이버",
+      "action": "BUY",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 75
+    }
+  ]
+}
