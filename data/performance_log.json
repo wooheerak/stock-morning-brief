@@ -618,6 +618,18 @@
     "code": "035420",
     "signal": "추격가능",
     "reason": "AI 투자 및 두나무 합병 기대감, 전일 거래량 급증",
+    "entry_close": 210000.0,
+    "perf_1d": -6.24,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-07-29",
+    "type": "short",
+    "name": "SK하이닉스",
+    "code": "000660",
+    "signal": "눌림목대기",
+    "reason": "호실적에도 과도한 급락, V자 반등 기대감 유입",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
