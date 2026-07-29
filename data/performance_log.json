@@ -630,8 +630,8 @@
     "code": "000660",
     "signal": "눌림목대기",
     "reason": "호실적에도 과도한 급락, V자 반등 기대감 유입",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 1401000.0,
+    "perf_1d": 36.97,
     "perf_3d": null,
     "perf_5d": null
   }
