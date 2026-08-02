@@ -1,0 +1,18 @@
+{
+  "date": "2026-08-03",
+  "time": "08:27",
+  "market_sentiment_score": 48,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "AI솔루션",
+    "비철금속",
+    "항공운송"
+  ],
+  "avoid_sectors": [
+    "대형성장",
+    "은행",
+    "정유"
+  ],
+  "candidates": []
+}

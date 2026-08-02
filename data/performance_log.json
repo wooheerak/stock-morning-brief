@@ -621,7 +621,7 @@
     "entry_close": 210000.0,
     "perf_1d": -6.24,
     "perf_3d": -1.19,
-    "perf_5d": null
+    "perf_5d": -0.95
   },
   {
     "date": "2026-07-29",
@@ -632,7 +632,7 @@
     "reason": "호실적에도 과도한 급락, V자 반등 기대감 유입",
     "entry_close": 1401000.0,
     "perf_1d": 36.97,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -5.64,
+    "perf_5d": 29.62
   }
 ]
