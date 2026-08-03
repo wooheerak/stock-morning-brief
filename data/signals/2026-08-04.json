@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-04",
+  "time": "08:33",
+  "market_sentiment_score": 91,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "AI반도체",
+    "소프트웨어",
+    "전기차"
+  ],
+  "avoid_sectors": [
+    "소비재",
+    "방어주"
+  ],
+  "candidates": []
+}
