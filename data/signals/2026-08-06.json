@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-06",
+  "time": "08:27",
+  "market_sentiment_score": 59,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "AI반도체",
+    "비철금속",
+    "수출주"
+  ],
+  "avoid_sectors": [
+    "IT하드웨어",
+    "일반반도체"
+  ],
+  "candidates": []
+}
