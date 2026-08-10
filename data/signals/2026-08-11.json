@@ -1,0 +1,29 @@
+{
+  "date": "2026-08-11",
+  "time": "08:05",
+  "market_sentiment_score": 23,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "원전",
+    "방어주"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "AI",
+    "성장주"
+  ],
+  "candidates": [
+    {
+      "code": "051600",
+      "name": "한전KPS",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 60
+    }
+  ]
+}
