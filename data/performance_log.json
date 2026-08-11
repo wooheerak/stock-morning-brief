@@ -642,6 +642,18 @@
     "code": "051600",
     "signal": "눌림목대기",
     "reason": "2Q 실적 부진 반영 후 원전 수주 모멘텀 유효.",
+    "entry_close": 45700.0,
+    "perf_1d": 1.97,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-08-12",
+    "type": "short",
+    "name": "네이버",
+    "code": "035420",
+    "signal": "눌림목대기",
+    "reason": "단기 조정 속 중장기 이평선 지지 기대, 플랫폼 기업 성장성",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
