@@ -654,8 +654,8 @@
     "code": "035420",
     "signal": "눌림목대기",
     "reason": "단기 조정 속 중장기 이평선 지지 기대, 플랫폼 기업 성장성",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 215500.0,
+    "perf_1d": 4.87,
     "perf_3d": null,
     "perf_5d": null
   }
