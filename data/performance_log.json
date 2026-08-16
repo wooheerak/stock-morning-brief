@@ -645,7 +645,7 @@
     "entry_close": 45700.0,
     "perf_1d": 1.97,
     "perf_3d": 3.39,
-    "perf_5d": null
+    "perf_5d": 1.42
   },
   {
     "date": "2026-08-12",
@@ -656,7 +656,7 @@
     "reason": "단기 조정 속 중장기 이평선 지지 기대, 플랫폼 기업 성장성",
     "entry_close": 215500.0,
     "perf_1d": 4.87,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 5.1,
+    "perf_5d": -1.86
   }
 ]
