@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-18",
+  "time": "07:47",
+  "market_sentiment_score": 54,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "IT하드웨어"
+  ],
+  "avoid_sectors": [
+    "건설",
+    "금융",
+    "블록체인"
+  ],
+  "candidates": []
+}
