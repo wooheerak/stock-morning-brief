@@ -658,5 +658,29 @@
     "perf_1d": 4.87,
     "perf_3d": 5.1,
     "perf_5d": -1.86
+  },
+  {
+    "date": "2026-08-19",
+    "type": "short",
+    "name": "현대차",
+    "code": "005380",
+    "signal": "눌림목대기",
+    "reason": "원/엔 환율 수혜 및 견조한 기술적 지지 유지.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-08-19",
+    "type": "mid",
+    "name": "기아",
+    "code": "000270",
+    "category": "가치",
+    "reason": "원/엔 환율 개선 기대 및 견조한 실적 기반 매력.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]
