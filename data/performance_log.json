@@ -682,5 +682,17 @@
     "perf_1d": 1.95,
     "perf_3d": null,
     "perf_5d": null
+  },
+  {
+    "date": "2026-08-21",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "추격가능",
+    "reason": "전일 강한 상승세, 증권사 긍정적 목표가 제시 및 실적 기대감",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]
