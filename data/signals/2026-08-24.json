@@ -1,0 +1,18 @@
+{
+  "date": "2026-08-24",
+  "time": "07:45",
+  "market_sentiment_score": 33,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "금융",
+    "IT서비스",
+    "전기차"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "바이오",
+    "게임"
+  ],
+  "candidates": []
+}

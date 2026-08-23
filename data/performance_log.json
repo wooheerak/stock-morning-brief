@@ -668,8 +668,8 @@
     "reason": "원/엔 환율 수혜 및 견조한 기술적 지지 유지.",
     "entry_close": 414000.0,
     "perf_1d": -1.09,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": 0.85,
+    "perf_5d": 9.42
   },
   {
     "date": "2026-08-19",
@@ -680,8 +680,8 @@
     "reason": "원/엔 환율 개선 기대 및 견조한 실적 기반 매력.",
     "entry_close": 133000.0,
     "perf_1d": 1.95,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -1.43,
+    "perf_5d": 6.54
   },
   {
     "date": "2026-08-21",
@@ -690,9 +690,9 @@
     "code": "005930",
     "signal": "추격가능",
     "reason": "전일 강한 상승세, 증권사 긍정적 목표가 제시 및 실적 기대감",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 247500.0,
+    "perf_1d": 9.49,
+    "perf_3d": 10.91,
     "perf_5d": null
   }
 ]
