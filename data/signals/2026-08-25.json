@@ -1,0 +1,40 @@
+{
+  "date": "2026-08-25",
+  "time": "07:51",
+  "market_sentiment_score": 16,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "IT 인프라",
+    "자동차"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "기술주",
+    "대형성장주"
+  ],
+  "candidates": [
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 60
+    },
+    {
+      "code": "005380",
+      "name": "현대차",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 60
+    }
+  ]
+}
