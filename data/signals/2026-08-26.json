@@ -1,0 +1,28 @@
+{
+  "date": "2026-08-26",
+  "time": "07:52",
+  "market_sentiment_score": 100,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "반도체",
+    "IT하드웨어"
+  ],
+  "avoid_sectors": [
+    "정유",
+    "에너지"
+  ],
+  "candidates": [
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "action": "BUY",
+      "entry_type": "OPEN",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 85
+    }
+  ]
+}

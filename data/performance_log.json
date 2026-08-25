@@ -693,7 +693,7 @@
     "entry_close": 247500.0,
     "perf_1d": 9.49,
     "perf_3d": 10.91,
-    "perf_5d": null
+    "perf_5d": 0.0
   },
   {
     "date": "2026-08-25",
@@ -702,8 +702,8 @@
     "code": "005930",
     "signal": "눌림목대기",
     "reason": "110조 주주환원 뉴스에도 급락, 단기 과매도에 따른 반등 여력",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 257000.0,
+    "perf_1d": -3.7,
     "perf_3d": null,
     "perf_5d": null
   },
@@ -714,6 +714,18 @@
     "code": "005380",
     "signal": "눌림목대기",
     "reason": "111일만에 임협 합의, 노사 리스크 완화로 투자 심리 개선 기대",
+    "entry_close": 421000.0,
+    "perf_1d": -1.66,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-08-26",
+    "type": "short",
+    "name": "삼성전자",
+    "code": "005930",
+    "signal": "추격가능",
+    "reason": "미국 반도체 섹터 강세 및 정부의 반도체 특별회계 신설 기대.",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
