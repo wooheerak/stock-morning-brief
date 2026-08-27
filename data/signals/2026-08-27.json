@@ -1,0 +1,28 @@
+{
+  "date": "2026-08-27",
+  "time": "12:25",
+  "market_sentiment_score": 63,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "금융"
+  ],
+  "avoid_sectors": [
+    "플랫폼",
+    "경기민감"
+  ],
+  "candidates": [
+    {
+      "code": "035720",
+      "name": "카카오",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 65
+    }
+  ]
+}

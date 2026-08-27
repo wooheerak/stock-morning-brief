@@ -726,6 +726,18 @@
     "code": "005930",
     "signal": "추격가능",
     "reason": "미국 반도체 섹터 강세 및 정부의 반도체 특별회계 신설 기대.",
+    "entry_close": 268500.0,
+    "perf_1d": 4.84,
+    "perf_3d": null,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-08-27",
+    "type": "short",
+    "name": "카카오",
+    "code": "035720",
+    "signal": "눌림목대기",
+    "reason": "카카오뱅크 파업 철회 소식 긍정적, 52주 신저가 부근 저평가 매력",
     "entry_close": null,
     "perf_1d": null,
     "perf_3d": null,
