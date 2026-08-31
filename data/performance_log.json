@@ -705,7 +705,7 @@
     "entry_close": 257000.0,
     "perf_1d": -3.7,
     "perf_3d": 0.0,
-    "perf_5d": null
+    "perf_5d": -2.53
   },
   {
     "date": "2026-08-25",
@@ -717,7 +717,7 @@
     "entry_close": 421000.0,
     "perf_1d": -1.66,
     "perf_3d": -2.28,
-    "perf_5d": null
+    "perf_5d": -6.12
   },
   {
     "date": "2026-08-26",
@@ -728,8 +728,8 @@
     "reason": "미국 반도체 섹터 강세 및 정부의 반도체 특별회계 신설 기대.",
     "entry_close": 268500.0,
     "perf_1d": 4.84,
-    "perf_3d": null,
-    "perf_5d": null
+    "perf_3d": -4.28,
+    "perf_5d": -4.28
   },
   {
     "date": "2026-08-27",
@@ -740,7 +740,7 @@
     "reason": "카카오뱅크 파업 철회 소식 긍정적, 52주 신저가 부근 저평가 매력",
     "entry_close": 36425.0,
     "perf_1d": -1.72,
-    "perf_3d": null,
+    "perf_3d": -0.34,
     "perf_5d": null
   },
   {
@@ -750,9 +750,9 @@
     "code": "035720",
     "signal": "눌림목대기",
     "reason": "카카오페이손보 성장 기대감, 5일선 위에 안착 시도",
-    "entry_close": null,
-    "perf_1d": null,
-    "perf_3d": null,
+    "entry_close": 36000.0,
+    "perf_1d": 2.36,
+    "perf_3d": 0.14,
     "perf_5d": null
   }
 ]
