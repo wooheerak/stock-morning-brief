@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-03",
+  "time": "09:25",
+  "market_sentiment_score": 60,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "IT대형주"
+  ],
+  "avoid_sectors": [
+    "중소형주"
+  ],
+  "candidates": []
+}
