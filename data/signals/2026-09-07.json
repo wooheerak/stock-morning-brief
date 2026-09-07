@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-07",
+  "time": "09:07",
+  "market_sentiment_score": 75,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "AI반도체",
+    "반도체",
+    "대형주"
+  ],
+  "avoid_sectors": [
+    "2차전지",
+    "플랫폼"
+  ],
+  "candidates": []
+}
