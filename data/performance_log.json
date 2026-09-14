@@ -754,5 +754,17 @@
     "perf_1d": 2.36,
     "perf_3d": 0.14,
     "perf_5d": 0.0
+  },
+  {
+    "date": "2026-09-14",
+    "type": "short",
+    "name": "KB금융",
+    "code": "105560",
+    "signal": "눌림목대기",
+    "reason": "신임 회장 기대감, 전일 52주 신고가 경신 및 기술적 강세.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]
