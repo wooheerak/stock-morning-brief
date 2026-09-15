@@ -762,8 +762,8 @@
     "code": "105560",
     "signal": "눌림목대기",
     "reason": "신임 회장 기대감, 전일 52주 신고가 경신 및 기술적 강세.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 177700.0,
+    "perf_1d": -3.21,
     "perf_3d": null,
     "perf_5d": null
   }
