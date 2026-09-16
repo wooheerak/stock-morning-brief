@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-16",
+  "time": "09:36",
+  "market_sentiment_score": 11,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "정유",
+    "비철금속"
+  ],
+  "avoid_sectors": [
+    "바이오",
+    "게임",
+    "중소형성장"
+  ],
+  "candidates": []
+}
