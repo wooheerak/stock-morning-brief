@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-18",
+  "time": "09:33",
+  "market_sentiment_score": 89,
+  "strategy": "적극매수",
+  "cash_ratio": "10~20%",
+  "watch_sectors": [
+    "반도체",
+    "기술주",
+    "산업재"
+  ],
+  "avoid_sectors": [],
+  "candidates": []
+}
