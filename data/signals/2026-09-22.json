@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-22",
+  "time": "09:58",
+  "market_sentiment_score": 100,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "반도체",
+    "IT하드웨어"
+  ],
+  "avoid_sectors": [],
+  "candidates": []
+}
