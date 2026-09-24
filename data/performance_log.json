@@ -774,8 +774,8 @@
     "code": "003670",
     "signal": "눌림목대기",
     "reason": "SK온 대상 1조원 규모 양극재 공급 계약 체결 호재",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 179900.0,
+    "perf_1d": 1.28,
     "perf_3d": null,
     "perf_5d": null
   }
