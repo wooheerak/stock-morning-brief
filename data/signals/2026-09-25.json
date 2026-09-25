@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-25",
+  "time": "09:39",
+  "market_sentiment_score": 48,
+  "strategy": "관망",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "에너지",
+    "비철금속"
+  ],
+  "avoid_sectors": [
+    "성장주",
+    "반도체"
+  ],
+  "candidates": []
+}
