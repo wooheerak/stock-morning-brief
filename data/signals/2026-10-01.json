@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-01",
+  "time": "10:23",
+  "market_sentiment_score": 50,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "반도체",
+    "에너지",
+    "전기차"
+  ],
+  "avoid_sectors": [
+    "대형주",
+    "내수주"
+  ],
+  "candidates": []
+}
