@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-05",
+  "time": "10:05",
+  "market_sentiment_score": 72,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "반도체",
+    "기술주",
+    "사이버보안"
+  ],
+  "avoid_sectors": [
+    "금융",
+    "중소형주"
+  ],
+  "candidates": []
+}
