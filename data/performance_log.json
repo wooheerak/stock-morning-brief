@@ -778,5 +778,17 @@
     "perf_1d": 1.28,
     "perf_3d": 0.0,
     "perf_5d": 2.22
+  },
+  {
+    "date": "2026-10-06",
+    "type": "mid",
+    "name": "네이버",
+    "code": "035420",
+    "category": "구조적성장",
+    "reason": "KB페이 협력으로 소상공인 금융 서비스 확장 및 플랫폼 성장 기대감 유효.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]

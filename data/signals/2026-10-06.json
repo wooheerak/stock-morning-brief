@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-06",
+  "time": "11:22",
+  "market_sentiment_score": 41,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "AI",
+    "핀테크"
+  ],
+  "avoid_sectors": [
+    "대형주"
+  ],
+  "candidates": []
+}
