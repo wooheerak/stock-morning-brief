@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-08",
+  "time": "11:08",
+  "market_sentiment_score": 9,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "금융",
+    "산업재"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "바이오",
+    "게임"
+  ],
+  "candidates": []
+}
