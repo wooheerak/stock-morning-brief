@@ -798,8 +798,8 @@
     "code": "005930",
     "signal": "눌림목대기",
     "reason": "전일 급락으로 과매도권 진입하나 하락세 지속 우려",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 237750.0,
+    "perf_1d": 12.93,
     "perf_3d": null,
     "perf_5d": null
   }
