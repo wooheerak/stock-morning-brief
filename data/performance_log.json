@@ -800,6 +800,18 @@
     "reason": "전일 급락으로 과매도권 진입하나 하락세 지속 우려",
     "entry_close": 237750.0,
     "perf_1d": 12.93,
+    "perf_3d": 5.36,
+    "perf_5d": null
+  },
+  {
+    "date": "2026-10-16",
+    "type": "mid",
+    "name": "삼성전자",
+    "code": "005930",
+    "category": "구조적성장",
+    "reason": "글로벌 경기 회복 및 반도체 업황 개선 기대, 낙폭과대에 따른 중장기 매력 부각",
+    "entry_close": null,
+    "perf_1d": null,
     "perf_3d": null,
     "perf_5d": null
   }

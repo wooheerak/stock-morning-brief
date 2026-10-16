@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-16",
+  "time": "09:31",
+  "market_sentiment_score": 79,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "소프트웨어",
+    "인터넷",
+    "바이오"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "화학"
+  ],
+  "candidates": []
+}
