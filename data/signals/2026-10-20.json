@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-20",
+  "time": "10:08",
+  "market_sentiment_score": 39,
+  "strategy": "위험관리",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [
+    "AI반도체",
+    "IT하드웨어"
+  ],
+  "avoid_sectors": [
+    "바이오",
+    "게임",
+    "중소형성장"
+  ],
+  "candidates": []
+}
