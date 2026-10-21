@@ -813,7 +813,7 @@
     "entry_close": 232000.0,
     "perf_1d": -9.48,
     "perf_3d": 0.0,
-    "perf_5d": null
+    "perf_5d": -9.48
   },
   {
     "date": "2026-10-20",
@@ -822,8 +822,8 @@
     "code": "005380",
     "category": "구조적성장",
     "reason": "전기차 전환 및 글로벌 시장 점유율 확대 기반의 중장기 성장성. 주가 조정 시 분할 매수 관점.",
-    "entry_close": null,
-    "perf_1d": null,
+    "entry_close": 309000.0,
+    "perf_1d": -4.37,
     "perf_3d": null,
     "perf_5d": null
   }

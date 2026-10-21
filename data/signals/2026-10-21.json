@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-21",
+  "time": "09:43",
+  "market_sentiment_score": 96,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "IT",
+    "제조업",
+    "운송"
+  ],
+  "avoid_sectors": [],
+  "candidates": []
+}
