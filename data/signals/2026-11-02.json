@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-02",
+  "time": "10:40",
+  "market_sentiment_score": 47,
+  "strategy": "보수적매수",
+  "cash_ratio": "50~60%",
+  "watch_sectors": [
+    "금융",
+    "소비재"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "IT하드웨어",
+    "화학"
+  ],
+  "candidates": []
+}
