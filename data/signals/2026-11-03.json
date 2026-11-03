@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-03",
+  "time": "12:32",
+  "market_sentiment_score": 50,
+  "strategy": "관망",
+  "cash_ratio": "60% 이상",
+  "watch_sectors": [],
+  "avoid_sectors": [
+    "반도체",
+    "바이오",
+    "게임",
+    "중소형성장"
+  ],
+  "candidates": []
+}
