@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-11",
+  "time": "11:02",
+  "market_sentiment_score": 65,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "중소형주",
+    "물류",
+    "유통"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "대형기술"
+  ],
+  "candidates": []
+}
