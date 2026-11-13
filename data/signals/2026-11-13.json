@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-13",
+  "time": "11:44",
+  "market_sentiment_score": 45,
+  "strategy": "보수적매수",
+  "cash_ratio": "40~50%",
+  "watch_sectors": [
+    "에너지"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "기술주"
+  ],
+  "candidates": []
+}
