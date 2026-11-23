@@ -826,5 +826,17 @@
     "perf_1d": -4.37,
     "perf_3d": 5.5,
     "perf_5d": -6.31
+  },
+  {
+    "date": "2026-11-23",
+    "type": "mid",
+    "name": "KB금융",
+    "code": "105560",
+    "category": "가치",
+    "reason": "은행연합회장 추천 등 지배구조 안정 및 '리딩플랫폼' 비전 제시",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]
