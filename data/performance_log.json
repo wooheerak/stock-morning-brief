@@ -838,5 +838,17 @@
     "perf_1d": 2.83,
     "perf_3d": 0.2,
     "perf_5d": null
+  },
+  {
+    "date": "2026-11-27",
+    "type": "short",
+    "name": "네이버",
+    "code": "035420",
+    "signal": "눌림목대기",
+    "reason": "네이버페이 금융 협력 뉴스, MA5 지지력 확인.",
+    "entry_close": null,
+    "perf_1d": null,
+    "perf_3d": null,
+    "perf_5d": null
   }
 ]

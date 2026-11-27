@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-27",
+  "time": "13:22",
+  "market_sentiment_score": 76,
+  "strategy": "적극매수",
+  "cash_ratio": "20~30%",
+  "watch_sectors": [
+    "원자재",
+    "은행",
+    "플랫폼"
+  ],
+  "avoid_sectors": [
+    "반도체",
+    "기술성장"
+  ],
+  "candidates": [
+    {
+      "code": "035420",
+      "name": "네이버",
+      "action": "WATCH",
+      "entry_type": "PULLBACK",
+      "virtual_entry_allowed": true,
+      "take_profit_pct": 3.0,
+      "stop_loss_pct": -2.0,
+      "holding_period": "DAY",
+      "confidence": 65
+    }
+  ]
+}
